@@ -8,6 +8,8 @@ Create a .env file in backend and add the following:
 DATABASE_URI = your mongodb uri
 PORT = 5000
 NODE_ENV = development
+JWT_SECRET = your secret key
+JWT_LIFETIME = your jwt expiration 
 ```
 
 ### Install Dependencies (backend & frontend)
