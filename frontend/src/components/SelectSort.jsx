@@ -1,17 +1,15 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
 
 const SelectSort = ({ sort, setSort }) => {
 
     return (
-        <Form.Select
+        <select
             onChange={(e) => setSort(e.target.value)}
             value={sort}
-            className='me-2'
-            style={{ cursor: 'pointer' }}
-            aria-label="Default select example"
+            className="cursor-pointer bg-gray-50 border border-gray-300 text-slate-700 text-sm rounded-md px-1 py-2"
+            aria-label="Select sort"
         >
-            <option>Sort by</option>
+            <option value=''>Sort by</option>
             <option value='name'>Name A - Z</option>
             <option value='-name'>Name Z - A</option>
             <option value='price'>Price - Lowest first</option>
@@ -22,7 +20,7 @@ const SelectSort = ({ sort, setSort }) => {
             <option value='-rating'>Rating - Highest first</option>
             <option value='-numberOfReviews'>Most Reviews</option>
             <option value='numberOfReviews'>Least Reviews</option>
-        </Form.Select>
+        </select>
     )
 }
 

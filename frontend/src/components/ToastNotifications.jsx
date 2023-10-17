@@ -7,28 +7,28 @@ const ToastNotifications = () => {
       duration: 5000,
       success: {
         style: {
-          border: '1px solid #2D3748',
+          border: '1px solid #334155',
           padding: '16px',
-          color: '#2D3748',
+          color: '#334155',
           fontWeight: 'bolder',
-          backgroundColor: '#E2E8F0'
+          backgroundColor: '#e2e8f0'
         },
         iconTheme: {
-          primary: '#1A202C',
-          secondary: '#FFFAEE',
+          primary: '#334155',
+          secondary: '#e2e8f0',
         },
       },
       error: {
         style: {
-          border: '1px solid crimson',
+          border: '1px solid #ef4444',
+          color: '#991b1b',
           padding: '16px',
-          color: 'crimson',
           fontWeight: 'bolder',
-          backgroundColor: '#E2E8F0',
+          backgroundColor: '#e2e8f0',
         },
         iconTheme: {
-          primary: 'crimson',
-          secondary: '#FFFAEE',
+          primary: '#991b1b',
+          secondary: '#e2e8f0',
         },
       }
     }

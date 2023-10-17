@@ -7,7 +7,6 @@ import { registerSchema } from '../utils/validationSchemas'
 import { useRegisterMutation } from '../slices/authApiSlice'
 import { toast } from 'react-hot-toast'
 import { setCredentials } from '../slices/authSlice'
-import FormContainer from '../components/FormContainer'
 import * as formik from 'formik'
 
 const RegisterScreen = () => {
@@ -64,7 +63,6 @@ const RegisterScreen = () => {
             }}
         >
             {({ handleSubmit, handleChange, values, errors, touched }) => (
-                <FormContainer>
                     <Card className='my-3 p-3 rounded'>
                         <h1 className='text-center text-uppercase'>Register</h1>
 
@@ -177,7 +175,6 @@ const RegisterScreen = () => {
                             </Row>
                         </div>
                     </Card>
-                </FormContainer>
             )
             }
         </Formik >

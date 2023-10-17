@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { useGetProductByIdQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
+import { FaEye, FaShoppingCart } from 'react-icons/fa'
 import Rating from '../components/Rating'
+import Container from '../components/Container'
 import GoBackButton from '../components/GoBackButton'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import toast from 'react-hot-toast'
+import HorizontalLine from '../components/HorizontalLine'
+import Button from '../components/Button'
+import Badge from '../components/Badge'
+import { toast } from 'react-hot-toast'
 
 const ProductScreen = () => {
   const { productId } = useParams()
@@ -40,101 +44,84 @@ const ProductScreen = () => {
 
   return (
     <>
-      <GoBackButton />
-
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error?.data?.message || error.error}</Message>
+        <Message variant='error'>{error?.data?.message || error.error}</Message>
       ) : (
         <>
-          <Row>
-            <Col md={5}>
-              <Image className='rounded' src={product.image} alt={product.name} fluid />
-            </Col>
-            <Col md={4}>
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  <h3>{product.name}</h3>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Rating rating={product.rating} numberOfReviews={product.numberOfReviews} />
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  Price: <strong>${product.price}</strong>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  Description: {product.description}
-                </ListGroup.Item>
-              </ListGroup>
-            </Col>
-            <Col md={3}>
-              <Card>
-                <ListGroup variant='flush'>
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Price:</Col>
-                      <Col>
-                        <strong>${product.price}</strong>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Status:</Col>
-                      {product.countInStock > 0
-                        ?
-                        <Col className='text-success fw-bold'>
-                          In Stock {product.countInStock}
-                        </Col>
-                        :
-                        <Col style={{ color: 'crimson' }} className='fw-bold'>
-                          Out of Stock
-                        </Col>}
-                    </Row>
-                  </ListGroup.Item>
-
-                  {/* Qty Select */}
-                  {product.countInStock > 0 && (
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Qty</Col>
-                        <Col>
-                          <Form.Select
-                            aria-label="Default select example"
-                            size='sm'
-                            className='text-center'
-                            value={qty}
-                            onChange={(e) => setQty(Number(e.target.value))}
-                          >
-                            {[...Array(product.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )}
-                          </Form.Select>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  )}
-
-                  <ListGroup.Item>
-                    <div className='d-grid'>
-                      <Button
-                        type='button'
-                        disabled={product.countInStock === 0}
-                        onClick={() => addToCartHandler(product._id, product.name)}
-                      >
-                        Add To Cart
-                      </Button>
+          <div className='p-8'>
+            <Container>
+              <div className='w-[100px]'>
+                <GoBackButton />
+              </div>
+              <div className='grid grid-cols-2 md:grid-cols-3 gap-10 mt-3'>
+                <div><img src={product.images[0].image} /></div>
+                <div className='flex flex-col gap-1 text-sm text-slate-700'>
+                  <h2 className='text-2xl font-semibold'>
+                    {product.name}
+                  </h2>
+                  <div className='mt-2'>
+                    <Rating rating={product.rating} numberOfReviews={product.numberOfReviews} />
+                  </div>
+                  <HorizontalLine />
+                  <div className='flex justify-between'>
+                    <div className='text-lg'>
+                      <span className='font-semibold'>CATEGORY: </span>{product.category}
                     </div>
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card>
-            </Col>
-          </Row>
+                    <div className='text-lg'>
+                      <span className='font-semibold'>BRAND: </span>{product.brand}
+                    </div>
+                  </div>
+                  <HorizontalLine />
+                  <div className='text-justify text-xl'>
+                    <span className='font-bold'>DESCRIPTION: </span>{product.description}
+                  </div>
+                  <HorizontalLine />
+                </div>
+                <div className='h-max px-6 py-3 bg-white border border-gray-200 rounded-md shadow-md'>
+                  <div className='text-2xl text-slate-700'>
+                    <span className='font-semibold'>PRICE: </span> ${product.price}
+                  </div>
+                  <HorizontalLine />
+                  <div>
+                    <span className='font-semibold'>Available: </span>
+                    <Badge countInStock={product.countInStock} />
+                    <HorizontalLine />
+
+                    <span className='font-semibold'>Quantity: </span>
+                    <select
+                      aria-label="Default select example"
+                      className='cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md px-5 py-1 ml-2'
+                      value={qty}
+                      onChange={(e) => setQty(Number(e.target.value))}
+                    >
+                      {[...Array(product.countInStock).keys()].map(
+                        (x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        )
+                      )}
+                    </select>
+                    <HorizontalLine />
+                  </div>
+
+                  <div>
+                    <Button
+                      onClick={() => addToCartHandler(product._id, product.name)}
+                      type='button'
+                      disabled={product.countInStock === 0}
+                      buttonText='Add To Cart'
+                      icon={<FaShoppingCart size={16} />}
+                    >
+                      <FaShoppingCart />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </Container>
+          </div>
         </>
       )}
     </>

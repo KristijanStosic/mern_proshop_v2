@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { Form, InputGroup } from 'react-bootstrap'
+import { useState } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'

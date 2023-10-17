@@ -6,7 +6,6 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { loginSchema } from '../utils/validationSchemas'
 import { useLoginMutation } from '../slices/authApiSlice'
 import { setCredentials } from '../slices/authSlice'
-import FormContainer from '../components/FormContainer'
 import * as formik from 'formik'
 import { toast } from 'react-hot-toast'
 
@@ -61,7 +60,12 @@ const LoginScreen = () => {
                 }}
             >
                 {({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
-                    <FormContainer>
+                   <section className='bg-gray-50 dark:bg-gray-900'>
+                        <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
+                        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+          <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+          Flowbite    
+      </a>
                         <Card className='my-3 p-3 rounded'>
                             <h1 className='text-center text-uppercase'>Login</h1>
 
@@ -131,7 +135,8 @@ const LoginScreen = () => {
                                 </Row>
                             </div>
                         </Card>
-                    </FormContainer>
+                   </div>
+                   </section>
                 )}
             </Formik>
         </>

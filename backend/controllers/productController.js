@@ -34,7 +34,7 @@ const getProducts = async (req, res) => {
 
   if (!products?.length) {
     res.status(404)
-    throw new Error('Products not found')
+    throw new Error('Products not found!')
   }
 
   res.status(200).json({ products, page, pages: Math.ceil(count / pageSize) })
