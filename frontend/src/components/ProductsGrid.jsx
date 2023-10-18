@@ -23,7 +23,7 @@ const ProductsGrid = ({ product }) => {
     }
 
     return (
-        <div className='cursor-pointer border-[1px] border-slate-200 bg-slate-50 rounded-md p-2 transition hover:scale-105 text-center text-sm text-slate-700'>
+        <div className='cursor-pointer border-[1px] border-slate-300 bg-slate-50 rounded-md p-2 transition hover:scale-105 text-center text-sm text-slate-700'>
             <div className='flex flex-col items-center w-full gap-3'>
                 <div className='aspect-square overflow-hidden relative w-full'>
                     <Link to={`/product/${product._id}`}>
@@ -34,13 +34,13 @@ const ProductsGrid = ({ product }) => {
                         />
                     </Link>
                 </div>
-                <div className='flex flex-col items-center gap-3'>
+                <div className='flex flex-col items-center gap-6'>
                     <Link to={`/product/${product._id}`}>
-                        <p className='text-xl font-semibold h-10'>
+                        <p className='text-lg font-semibold h-10'>
                             {product.name}
                         </p>
                     </Link>
-                    <div className='mt-4'>
+                    <div>
                         <Rating
                             rating={product.rating}
                             numberOfReviews={product.numberOfReviews}

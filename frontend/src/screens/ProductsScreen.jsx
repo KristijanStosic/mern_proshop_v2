@@ -46,7 +46,7 @@ const ProductsScreen = () => {
                         <Message>{error?.data?.message || error.error}</Message>
                     ) : (
                         <>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 mt-3'>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-4 mt-3'>
                                 {view === 'grid' && data.products.map((product) => (
                                     <div key={product._id}>
                                         <ProductsGrid product={product} />
