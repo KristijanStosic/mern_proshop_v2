@@ -6,10 +6,17 @@ const override = {
 }
 
 const Loader = () => {
-  return <div className='flex items-center justify-center mt-auto'>
-    <ClockLoader aria-label="Loading Spinner"
-    data-testid="loader" cssOverride={override} size={100} color="#334155" />
-  </div>
+  return (
+    <div className='flex items-center justify-center mt-16'>
+      <ClockLoader 
+        aria-label="Loading Spinner"
+        data-testid="loader" 
+        cssOverride={override} 
+        size={100} 
+        color="#334155" 
+      />
+    </div>
+  )
 }
 
 export default Loader

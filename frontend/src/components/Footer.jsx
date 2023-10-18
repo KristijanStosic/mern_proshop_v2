@@ -52,10 +52,12 @@ const Footer = () => {
             </FooterList>
           </div>
         </Container>
-        <div className='flex flex-center justify-center mb-6'>
-          <p>&copy; {new Date().getFullYear()} ProShop. All rights reserved</p>
-        </div>
       </div>
+      <div className='bg-slate-500 p-4 text-slate-50'>
+          <div className='flex flex-center justify-center'>
+            <p>&copy; {new Date().getFullYear()} ProShop. All rights reserved</p>
+          </div>
+        </div>
     </footer>
   )
 }
