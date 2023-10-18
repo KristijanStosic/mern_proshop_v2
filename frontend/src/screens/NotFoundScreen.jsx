@@ -1,6 +1,7 @@
-import { Container, Button } from 'react-bootstrap'
-import { FaExclamationTriangle } from 'react-icons/fa'
+import Container from '../components/Container'
+import { FaArrowLeft, FaExclamationTriangle } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import Button from '../components/Button'
 
 const NotFoundScreen = () => {
     const navigate = useNavigate()
@@ -10,14 +11,19 @@ const NotFoundScreen = () => {
     }
 
     return (
-        <div className='d-flex justify-content-center align-items-center my-5 py-5'>
+        <div className='p-8'>
             <Container>
-                <h1 className='text-center'>
-                    <FaExclamationTriangle size={50} /> 404 - Page Not Found!
-                </h1>
-                <Container className='d-flex justify-content-center'>
-                    <Button size='lg' onClick={goBack}>Go Back</Button>
-                </Container>
+                <div className='flex flex-col items-center justify-center gap-4 pt-12'>
+                    <div className='text-slate-700 text-3xl'><FaExclamationTriangle size={48} /></div>
+                    <div className='text-slate-700 text-3xl'><h1>404 - Page not found!</h1></div>
+                    <div className='w-[300px]'>
+                        <Button 
+                        onClick={goBack}
+                        buttonText='Go Back!' 
+                        icon={<FaArrowLeft />}>
+                        </Button>
+                    </div>
+                </div>
             </Container>
         </div>
     )
