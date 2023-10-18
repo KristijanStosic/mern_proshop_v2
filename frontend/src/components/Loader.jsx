@@ -2,12 +2,11 @@ import { ClockLoader } from 'react-spinners'
 
 const override = {
   display: "block",
-  margin: "0 auto",
 }
 
 const Loader = () => {
   return (
-    <div className='flex items-center justify-center mt-16'>
+    <div className='flex items-center justify-center mt-32'>
       <ClockLoader 
         aria-label="Loading Spinner"
         data-testid="loader" 
