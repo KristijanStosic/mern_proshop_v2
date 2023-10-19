@@ -5,7 +5,6 @@ const Button = ({
     outline,
     small,
     icon,
-    custom,
     onClick
 }) => {
     return (
@@ -29,7 +28,6 @@ const Button = ({
     ${outline ? 'text-slate-700 font-bold' : 'text-slate-200'}
     ${small ? 'text-sm font-medium' : 'text-md font-semibold'}
     ${small ? 'py-1 px-2  border-[1px]' : 'py-3 px-4 border-2'}
-    ${custom ? custom : ''}
     `}>
       {icon && icon} {buttonText}
     </button>

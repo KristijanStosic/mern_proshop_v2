@@ -58,7 +58,7 @@ const ProductScreen = () => {
               <div className='grid grid-cols-2 md:grid-cols-3 gap-10 mt-3'>
                 <div><img src={product.image} /></div>
                 <div className='flex flex-col gap-1 text-sm text-slate-700'>
-                  <h2 className='text-2xl font-semibold'>
+                  <h2 className='text-2 xl font-semibold'>
                     {product.name}
                   </h2>
                   <div className='mt-2'>
@@ -66,13 +66,13 @@ const ProductScreen = () => {
                   </div>
                   <HorizontalLine />
                   <div className='flex flex-col'>
-                    <div className='text-lg'>
+                    <div className='text-xl'>
                       <span className='font-semibold'>CATEGORY: </span>{product.category}
                     </div>
-                    <div className='text-lg'>
+                    <div className='text-xl'>
                       <span className='font-semibold'>BRAND: </span>{product.brand}
                     </div>
-                    <div className='text-lg'>
+                    <div className='text-xl'>
                       <span className='font-semibold'>MODEL: </span>{product.model}
                     </div>
                   </div>

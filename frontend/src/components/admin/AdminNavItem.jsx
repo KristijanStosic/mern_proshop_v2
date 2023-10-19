@@ -4,7 +4,8 @@ const AdminNavItem = ({ selected, icon, label }) => {
         flex 
         items-center 
         justify-center 
-        text-center gap-1 
+        text-center 
+        gap-1 
         p-2 
         border-b-2 
         hover:text-slate-700 

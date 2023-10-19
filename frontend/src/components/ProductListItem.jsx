@@ -30,14 +30,14 @@ const ProductListItem = ({ product }) => {
                         <img className="fill object-contain rounded" src={product.image} alt={product.name} />
                     </div>
                 </Link>
-                <div className='flex flex-col justify-between gap-4'>
+                <div className='flex flex-col justify-between'>
                     <Link className="font-semibold" to={`/product/${product._id}`}>
                         {product.name}
                     </Link>
                     <div>
                         <Rating rating={product.rating} numberOfReviews={product.numberOfReviews} />
                     </div>
-                    <div className='w-[120px]'>
+                    <div>
                         <Button
                             onClick={() => addToCartHandler(product._id, product.name)}
                             type='button'
@@ -53,14 +53,8 @@ const ProductListItem = ({ product }) => {
             <div className="justify-self-center font-semibold">
                 ${convertToNumber(product.price)}
             </div>
-            <div className="justify-self-center font-semibold">
-                {product.category}
-            </div>
-            <div className="justify-self-center font-semibold">
-                {product.brand}
-            </div>
-            <div className="justify-self-center font-semibold">
-                {product.model}
+            <div className="col-span-3 justify-self-center font-semibold">
+                {product.category} / {product.brand} / {product.model}
             </div>
             <div className="justify-self-end">
                 <Badge countInStock={product.countInStock} />

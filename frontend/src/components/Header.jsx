@@ -8,7 +8,7 @@ const Header = () => {
     
     return (
         <div className='sticky top-0 w-full bg-slate-200 z-30 shadow-sm text-slate-700'>
-            <div className='px-8 py-4 border-b-[1px] border-slate-700'>
+            <div className='px-8 py-4 border-b-slate-700'>
                 <Container>
                     <div className='flex items-center justify-between gap-3 md:gap-0'>
                         <Link to='/' style={{ fontFamily: 'Redressed' }} className='font-bold text-2xl'>ProShop</Link>
