@@ -93,7 +93,7 @@ const CartItem = ({ cartItem }) => {
                 ${convertToNumber(cartItem.qty * cartItem.price)}
             </div>
             <div className="justify-self-end">
-                <FaTrash onClick={() => removeFromCartHandler(cartItem._id, cartItem.name)} className="text-slate-700 cursor-pointer" size={24} />
+                <FaTrash onClick={() => removeFromCartHandler(cartItem._id, cartItem.name)} className="text-slate-700 cursor-pointer hover:opacity-75" size={24} />
             </div>
         </div>
         )

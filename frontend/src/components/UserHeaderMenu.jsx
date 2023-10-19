@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useLogoutMutation } from "../slices/authApiSlice"
 import { logout } from "../slices/authSlice"
 import { FaArrowLeft, FaArrowRight, FaCaretDown, FaCaretUp, FaShoppingBag, FaUserEdit, FaUserPlus } from "react-icons/fa"
+import { MdAdminPanelSettings } from 'react-icons/md'
 import { toast } from 'react-hot-toast'
 import Avatar from "./Avatar"
 import UserMenuItem from "./UserMenuItem"
@@ -43,9 +44,18 @@ const UserHeaderMenu = () => {
                     {isOpen ? <FaCaretUp /> : <FaCaretDown />}
                 </div>
                 {isOpen && (
-                    <div className="absolute rounded-md shadow-md w-[170px] bg-white overflow-hidden right-0 top-12 text-sm flex flex-col cursor-pointer">
+                    <div className="absolute rounded-md shadow-md w-[170px] bg-white overflow-hidden right-0 top-12 text-md flex flex-col cursor-pointer">
                         {user ? (
                             <div>
+                                {user.isAdmin && (
+                                    <Link to='/admin'>
+                                        <UserMenuItem 
+                                        icon={<MdAdminPanelSettings className='mr-2' />}
+                                        onClick={toggleUserMenu}>
+                                            Admin Panel
+                                        </UserMenuItem>
+                                    </Link>
+                                )}
                                 <Link to='/profile'>
                                     <UserMenuItem
                                         icon={<FaUserEdit className='mr-2' />}

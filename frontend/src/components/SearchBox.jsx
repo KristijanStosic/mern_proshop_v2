@@ -20,26 +20,22 @@ const SearchBox = () => {
     }
 
     return (
-        <Form onSubmit={submitHandler} 
-            className='d-flex justify-content-center align-items-center ms-auto'>
-            <InputGroup style={{ cursor: 'pointer' }}>
-                <Form.Control
+        <div >
+            <form onSubmit={submitHandler} className='flex items-center justify-center'>
+                <input
+                    autoComplete='off'
                     type='text'
                     name='q'
                     onChange={(e) => setKeyword(e.target.value)}
                     value={keyword}
                     placeholder='Search Products...'
-                    className='mr-sm-2 ml-sm-5 form-control'
-                    style={{ width: '300px'}}
+                    className='p-2 border-gray-300 rounded-l-md focus:outline-none focus:border-[0.5px] focus:border-slate-500 w-80'
                 />
-                <InputGroup.Text className='bg-light' >
-                    <button 
-                        style={{ border: 'none', background: 'none' }} 
-                        type='submit'><FaSearch color='#2D3748' />
-                    </button>
-                </InputGroup.Text>
-            </InputGroup>
-        </Form>
+                <button type="button" className="p-3 rounded-r-lg font-medium text-center inline-flex items-center text-white bg-slate-700 hover:opacity-75 focus:ring-4 focus:outline-none">
+                    <FaSearch />
+                </button>
+            </form>
+        </div>
     )
 }
 

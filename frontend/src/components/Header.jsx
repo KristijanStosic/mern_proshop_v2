@@ -12,7 +12,9 @@ const Header = () => {
                 <Container>
                     <div className='flex items-center justify-between gap-3 md:gap-0'>
                         <Link to='/' style={{ fontFamily: 'Redressed' }} className='font-bold text-2xl'>ProShop</Link>
-                        <div className='hidden md:block'>Search</div>
+                        <div className='hidden md:block'>
+                            <SearchBox />
+                        </div>
                         <div className='flex items-center gap-8 md:gap-12'>
                             <CartHeaderCount />
                             <UserHeaderMenu />
