@@ -29,7 +29,7 @@ const ProductsGrid = ({ product }) => {
                     <Link to={`/product/${product._id}`}>
                         <img
                             className='object-contain fill rounded'
-                            src={product.images[0].image}
+                            src={product.image}
                             alt={product.name}
                         />
                     </Link>
@@ -50,7 +50,7 @@ const ProductsGrid = ({ product }) => {
                 <div>
                     <Badge countInStock={product.countInStock} />
                 </div>
-                <div className='text-2xl font-semibold mt-2'>
+                <div className='text-2xl font-semibold'>
                     ${product.price}
                 </div>
                 <div className='pb-1'>

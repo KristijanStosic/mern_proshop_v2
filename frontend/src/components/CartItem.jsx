@@ -57,7 +57,7 @@ const CartItem = ({ cartItem }) => {
             <div className="col-span-2 justify-self-start flex items-center gap-2 md:gap-4">
                 <Link to={`/product/${cartItem._id}`}>
                     <div className="relative w-[70px] aspect-square">
-                        <img className="fill object-contain rounded" src={cartItem.images[0].image} alt={cartItem.name} />
+                        <img className="fill object-contain rounded" src={cartItem.image} alt={cartItem.name} />
                     </div>
                 </Link>
                 <Link className="font-semibold" to={`/product/${cartItem._id}`}>

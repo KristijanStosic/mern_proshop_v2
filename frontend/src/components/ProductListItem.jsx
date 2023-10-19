@@ -23,11 +23,11 @@ const ProductListItem = ({ product }) => {
     }
 
     return (
-        <div className="grid grid-cols-6 text-xs md:text-sm gap-4 py-4 border-t-[1px] border-slate-300 items-center text-slate-700">
+        <div className="grid grid-cols-7 text-xs md:text-sm gap-4 py-4 border-t-[1px] border-slate-300 items-center text-slate-700">
             <div className="col-span-2 justify-self-start flex gap-2 md:gap-4">
                 <Link to={`/product/${product._id}`}>
                     <div className="w-[100px] h-[100%]">
-                        <img className="fill object-contain rounded" src={product.images[0].image} alt={product.name} />
+                        <img className="fill object-contain rounded" src={product.image} alt={product.name} />
                     </div>
                 </Link>
                 <div className='flex flex-col justify-between gap-4'>
@@ -54,10 +54,13 @@ const ProductListItem = ({ product }) => {
                 ${convertToNumber(product.price)}
             </div>
             <div className="justify-self-center font-semibold">
+                {product.category}
+            </div>
+            <div className="justify-self-center font-semibold">
                 {product.brand}
             </div>
             <div className="justify-self-center font-semibold">
-                {product.category}
+                {product.model}
             </div>
             <div className="justify-self-end">
                 <Badge countInStock={product.countInStock} />

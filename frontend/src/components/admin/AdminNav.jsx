@@ -32,6 +32,27 @@ const AdminNav = () => {
                             selected={location.pathname === '/admin/all-orders'}
                         />
                     </Link>
+                    <Link to='/admin/all-categories'>
+                        <AdminNavItem
+                            label='Categories'
+                            icon={<MdDashboard size={20} />}
+                            selected={location.pathname === '/admin/all-categories'}
+                        />
+                    </Link>
+                    <Link to='/admin/all-models'>
+                        <AdminNavItem
+                            label='Models'
+                            icon={<MdDashboard size={20} />}
+                            selected={location.pathname === '/admin/all-models'}
+                        />
+                    </Link>
+                    <Link to='/admin/all-brands'>
+                        <AdminNavItem
+                            label='Brands'
+                            icon={<MdDashboard size={20} />}
+                            selected={location.pathname === '/admin/all-brands'}
+                        />
+                    </Link>
                 </div>
             </Container>
         </div>)
