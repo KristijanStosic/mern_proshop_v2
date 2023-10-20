@@ -4,7 +4,7 @@ import Product from "../models/productModel.js"
 // @route   GET /api/products
 // @access  Public
 const getProducts = async (req, res) => {
-  const pageSize = 8
+  const pageSize = 1
   const page = Number(req.query.page) || 1
   const limit = pageSize
   const skip = (page - 1) * pageSize
@@ -14,13 +14,12 @@ const getProducts = async (req, res) => {
       $regex: req.query.keyword,
       $options: 'i',
     },
-  }
-    : {}
+  } : {}
 
-  let sortOptions = {}; 
+  let sortOptions = {}
 
   if (req.query.sort) {
-    const sortFields = req.query.sort.split(',').join(' ');
+    const sortFields = req.query.sort.split(',').join(' ')
     sortOptions = sortFields
   } else {
     sortOptions = '-createdAt'

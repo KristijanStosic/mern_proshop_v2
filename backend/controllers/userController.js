@@ -78,8 +78,7 @@ const getUsers = async (req, res) => {
             $regex: req.query.keyword,
             $options: 'i',
         },
-    }
-        : {}
+    } : {}
 
     const count = await User.countDocuments({ ...keyword })
     const users = await User.find({ ...keyword })
