@@ -5,7 +5,7 @@ import ProductsGrid from '../components/ProductsGrid'
 import ProductsList from '../components/ProductsList'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import Paginate from '../components/Paginate'
+import PaginateProducts from '../components/PaginateProducts'
 import SelectSort from '../components/SelectSort'
 import GoBackButton from '../components/GoBackButton'
 import ViewButtons from '../components/ViewButtons'
@@ -72,7 +72,7 @@ const ProductsScreen = () => {
                         </div>
 
                         <div className='my-3'>
-                            <Paginate
+                            <PaginateProducts
                                 page={data.page}
                                 pages={data.pages}
                                 keyword={keyword ? keyword : ''}
