@@ -1,20 +1,25 @@
+import APIFeatures from "../api-features/apiFeatures.js"
 import Product from "../models/productModel.js"
 
 // @desc    Fetch all products
 // @route   GET /api/products
 // @access  Public
 const getProducts = async (req, res) => {
-  const pageSize = 1
+  const pageSize = 8
   const page = Number(req.query.page) || 1
   const limit = pageSize
   const skip = (page - 1) * pageSize
 
-  const keyword = req.query.keyword ? {
-    name: {
-      $regex: req.query.keyword,
-      $options: 'i',
-    },
-  } : {}
+  const searchCriteria = {}
+
+  if (req.query.keyword) {
+    searchCriteria.$or = [
+      { name: { $regex: req.query.keyword, $options: 'i' } },
+      { brand: { $regex: req.query.keyword, $options: 'i' } },
+      { category: { $regex: req.query.keyword, $options: 'i' } },
+      { model: { $regex: req.query.keyword, $options: 'i' } }
+    ];
+  }
 
   let sortOptions = {}
 
@@ -25,8 +30,8 @@ const getProducts = async (req, res) => {
     sortOptions = '-createdAt'
   }
 
-  const count = await Product.countDocuments({ ...keyword })
-  const products = await Product.find({ ...keyword })
+  const count = await Product.countDocuments({ ...searchCriteria })
+  const products = await Product.find({ ...searchCriteria })
     .sort(sortOptions)
     .limit(limit)
     .skip(skip)

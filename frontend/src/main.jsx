@@ -30,17 +30,20 @@ import ReviewListScreen from './screens/admin/ReviewListScreen'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
+      {/* Public Routes - Products Routes */}
       <Route index={true} path='/' element={<ProductsScreen />} />
       <Route path='/search/:keyword' element={<ProductsScreen />} />
       <Route path='/page/:page' element={<ProductsScreen />} />
       <Route path='/search/:keyword/page/:page' element={<ProductsScreen />} />
       
       <Route path='/product/:productId' element={<ProductScreen />} />
-      <Route path='/register' element={<RegisterScreen />} />
-      <Route path='/login' element={<LoginScreen />} />
       <Route path='/cart' element={<CartScreen />} />
 
-      {/* Admin Routes */}
+      {/* Public Routes (Not registered users) */}
+      <Route path='/register' element={<RegisterScreen />} />
+      <Route path='/login' element={<LoginScreen />} />
+
+      {/* Private - Admin Routes */}
       <Route path='/admin' element={<AdminRoute />}>
         <Route path='/admin/all-products' element={<ProductListScreen />} />
         <Route path='/admin/all-users' element={<UserListScreen />} />
@@ -50,12 +53,13 @@ const router = createBrowserRouter(
         <Route path='/admin/all-models' element={<ModelListScreen />} />
         <Route path='/admin/all-reviews' element={<ReviewListScreen />} />
 
+        {/* User Pagination routes */}
         <Route path='/admin/search-users/:keyword' element={<UserListScreen />} />
         <Route path='/admin/page/:page' element={<UserListScreen />} />
         <Route path='/admin/search-users/:keyword/page/:page' element={<UserListScreen />} />
       </Route>
 
-      {/* Registered Users */}
+      {/* Private - Registered Users Routes */}
       <Route path='' element={<PrivateRoute />}>
 
       </Route>

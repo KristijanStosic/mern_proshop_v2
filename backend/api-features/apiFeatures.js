@@ -3,19 +3,60 @@ class APIFeatures {
         this.query = query
         this.queryStr = queryStr
     }
-
+    
     search() {
         const keyword = this.queryStr.keyword
-            ? {
+        const searchCriteria = []
+
+        /*const searchCriteria = {}
+
+        if (keyword) {
+        searchCriteria.$or = [
+                { name: { $regex: keyword, $options: 'i' } },
+                { brand: { $regex: keyword, $options: 'i' } },
+                { category: { $regex: keyword, $options: 'i' } },
+                { model: { $regex: keyword, $options: 'i' } }
+            ]
+        }*/
+
+        if (keyword) {
+            searchCriteria.push({
                 name: {
-                    $regex: this.queryStr.keyword,
+                    $regex: keyword,
                     $options: 'i',
                 },
-            }
-            : {}
+            })
+            
+            searchCriteria.push({
+                brand: {
+                    $regex: keyword,
+                    $options: 'i',
+                },
+            })
 
-        this.query = this.query.find({ ...keyword })
+            searchCriteria.push({
+                category: {
+                    $regex: keyword,
+                    $options: 'i',
+                },
+            })
+
+            searchCriteria.push({
+                model: {
+                    $regex: keyword,
+                    $options: 'i',
+                },
+            })
+        }
+    
+        if (searchCriteria.length > 0) {
+            this.query = this.query.find({ $or: searchCriteria })
+        }
+
         return this
+
+        /*this.query = this.query.find({ ...searchCriteria })
+        return this*/
     }
 
     filter() {

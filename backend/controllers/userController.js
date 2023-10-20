@@ -73,15 +73,17 @@ const getUsers = async (req, res) => {
     const limit = pageSize
     const skip = (page - 1) * pageSize
 
-    const keyword = req.query.keyword ? {
-        email: {
-            $regex: req.query.keyword,
-            $options: 'i',
-        },
-    } : {}
+    const searchCriteria = {}
 
-    const count = await User.countDocuments({ ...keyword })
-    const users = await User.find({ ...keyword })
+    if (req.query.keyword) {
+        searchCriteria.$or = [
+            { name: { $regex: req.query.keyword, $options: 'i' } },
+            { email: { $regex: req.query.keyword, $options: 'i' } },
+        ]
+    }
+
+    const count = await User.countDocuments({ ...searchCriteria })
+    const users = await User.find({ ...searchCriteria })
         .limit(limit)
         .skip(skip)
 
