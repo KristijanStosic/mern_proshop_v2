@@ -57,4 +57,31 @@ const getProductById = async (req, res) => {
   return res.status(200).json(product)
 }
 
-export { getProducts, getProductById }
+// @desc    Create new product
+// @route   POST /api/products
+// @access  Private
+const createProduct = async (req, res) => {
+  const { name, price, image, brand, category, model, countInStock, description } = req.body
+
+  const product = await Product.create({
+    name,
+    price,
+    image,
+    brand,
+    category,
+    model,
+    countInStock,
+    description,
+    user: req.user._id
+  })
+
+  if (product) {
+    const createdProduct = await product.save()
+    res.status(201).json(createdProduct)
+  } else {
+    res.status(400)
+    throw new Error('Invalid product data')
+  }
+}
+
+export { getProducts, getProductById, createProduct }

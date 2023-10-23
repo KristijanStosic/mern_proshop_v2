@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react'
-import * as formik from 'formik'
-import { createProductSchema } from '../utils/validationSchemas'
 import { Card, Form, Button } from 'react-bootstrap'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 
 const CreateProductForm = ({ closeDialog }) => {
-    const { Formik } = formik
     const [imageUploading, setImageUploading] = useState(false)
 
     const handleCreateProductSubmitForm = async (values) => {
@@ -37,20 +34,7 @@ const CreateProductForm = ({ closeDialog }) => {
 
     return (
         <>
-            <Formik
-                onSubmit={handleCreateProductSubmitForm}
-                validationSchema={createProductSchema}
-                initialValues={{
-                    name: '',
-                    image: '',
-                    description: '',
-                    brand: '',
-                    category: '',
-                    price: 1,
-                    countInStock: 1
-                }}
-            >
-                {({ handleSubmit, handleChange, values, errors, touched, setFieldValue }) => (
+
                     <Form noValidate onSubmit={handleSubmit}>
                         <Form.Group className='my-2' controlId="validationFormik01">
                             <Form.Label>Name</Form.Label>
@@ -182,8 +166,7 @@ const CreateProductForm = ({ closeDialog }) => {
                         </div>
 
                     </Form>
-                )}
-            </Formik>
+
         </>
     )
 }
