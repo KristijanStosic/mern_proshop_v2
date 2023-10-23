@@ -8,6 +8,8 @@ import { validateEmail } from '../utils/validateEmail'
 import Container from '../components/Container'
 import FormContainer from '../components/FormContainer'
 import Input from '../components/Input'
+import Button from '../components/Button'
+import LoadingButton from '../components/LoadingButton'
 import PasswordStrengthIndicator from '../components/PasswordStrengthIndicator'
 
 const RegisterScreen = () => {
@@ -120,27 +122,11 @@ const RegisterScreen = () => {
                                     />
                         }
 
-                        <button
+                        <Button
                             type='submit'
                             disabled={isLoading || !isPasswordStrong}
-                            className='
-                                px-4
-                                py-3
-                                bg-slate-700
-                                w-full
-                                text-white
-                                disabled:opacity-75 
-                                disabled:cursor-not-allowed
-                                rounded-md
-                                hover:opacity-75 
-                                transition 
-                                border-slate-700 
-                                flex 
-                                items-center 
-                                justify-center 
-                                gap-2'>
-                            {isLoading ? 'Loading...' : 'Submit'}
-                        </button>
+                            buttonText={isLoading ? <LoadingButton /> : 'Register'}
+                        />
 
                         <p className='text-sm text-slate-700'>Already have an account?{' '}
                             <Link className='underline' to={redirect ? `/login?redirect=${redirect}` : '/login'}>

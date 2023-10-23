@@ -5,8 +5,10 @@ import { useLoginMutation } from '../slices/authApiSlice'
 import { setCredentials } from '../slices/authSlice'
 import { toast } from 'react-hot-toast'
 import Input from '../components/Input'
+import Button from '../components/Button'
 import Container from '../components/Container'
 import FormContainer from '../components/FormContainer'
+import LoadingButton from '../components/LoadingButton'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -73,28 +75,11 @@ const LoginScreen = () => {
                             }}
                         />
 
-                        <button
+                        <Button
                             type='submit'
                             disabled={isLoading}
-                            className='
-                                px-4
-                                py-3
-                                bg-slate-700
-                                w-full
-                                text-white
-                                disabled:opacity-75 
-                                disabled:cursor-not-allowed
-                                rounded-md
-                                hover:opacity-75 
-                                transition 
-                                border-slate-700 
-                                flex 
-                                items-center 
-                                justify-center 
-                                gap-2'>
-                            {isLoading ? 'Loading...' : 'Submit'}
-                        </button>
-
+                            buttonText={isLoading ? <LoadingButton /> : 'Login'}
+                        />
 
                         <p className='text-sm text-slate-700'>Don't have an account?{' '}
                             <Link className='underline' to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>
