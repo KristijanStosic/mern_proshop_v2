@@ -1,6 +1,6 @@
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'
 
-const Rating = ({ rating, numberOfReviews, color }) => {
+const Rating = ({ rating, numberOfReviews }) => {
     return (
         <div className='flex items-center gap-3'>
             <div className='flex text-xl text-rose-600 gap-1'>
@@ -60,10 +60,6 @@ const Rating = ({ rating, numberOfReviews, color }) => {
             </span>
         </div>
     )
-}
-
-Rating.defaultProps = {
-    color: '#f8e825',
 }
 
 export default Rating

@@ -28,7 +28,7 @@ const ProductsGrid = ({ product }) => {
                 <div className='aspect-square overflow-hidden relative w-full'>
                     <Link to={`/product/${product._id}`}>
                         <img
-                            className='object-contain fill rounded'
+                            className='object-cover h-full w-full rounded'
                             src={product.image}
                             alt={product.name}
                         />
@@ -53,7 +53,7 @@ const ProductsGrid = ({ product }) => {
                 <div className='text-2xl font-semibold'>
                     ${product.price}
                 </div>
-                <div className='pb-1'>
+                <div>
                     <Button
                         onClick={() => addToCartHandler(product._id, product.name)}
                         type='button'

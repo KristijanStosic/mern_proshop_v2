@@ -11,7 +11,7 @@ const Header = () => {
             <div className='px-8 py-4 border-b-slate-700'>
                 <Container>
                     <div className='flex items-center justify-between gap-3 md:gap-0'>
-                        <Link to='/' style={{ fontFamily: 'Redressed' }} className='font-bold text-2xl'>ProShop</Link>
+                        <Link to='/' style={{ fontFamily: 'Redressed' }} className='font-bold text-3xl'>ProShop</Link>
                         <div className='hidden md:block'>
                             <SearchBox />
                         </div>

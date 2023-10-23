@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProductByIdQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
-import { FaEye, FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingCart } from 'react-icons/fa'
+import { toast } from 'react-hot-toast'
 import Rating from '../components/Rating'
 import Container from '../components/Container'
 import GoBackButton from '../components/GoBackButton'
@@ -12,7 +13,6 @@ import Message from '../components/Message'
 import HorizontalLine from '../components/HorizontalLine'
 import Button from '../components/Button'
 import Badge from '../components/Badge'
-import { toast } from 'react-hot-toast'
 
 const ProductScreen = () => {
   const { productId } = useParams()
@@ -56,9 +56,11 @@ const ProductScreen = () => {
                 <GoBackButton />
               </div>
               <div className='grid grid-cols-2 md:grid-cols-3 gap-10 mt-3'>
-                <div><img src={product.image} /></div>
+                <div className='aspect-square overflow-hidden'>
+                  <img src={product.image} alt={product.name} className='object-cover h-full w-full rounded' />
+                </div>
                 <div className='flex flex-col gap-1 text-sm text-slate-700'>
-                  <h2 className='text-2 xl font-semibold'>
+                  <h2 className='text-2xl font-semibold'>
                     {product.name}
                   </h2>
                   <div className='mt-2'>
