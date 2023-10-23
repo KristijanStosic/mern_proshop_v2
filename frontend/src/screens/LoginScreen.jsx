@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Form, Button, Row, Col, Card, InputGroup } from 'react-bootstrap'
-import { FaEye, FaEyeSlash } from 'react-icons/fa'
-import { loginSchema } from '../utils/validationSchemas'
 import { useLoginMutation } from '../slices/authApiSlice'
 import { setCredentials } from '../slices/authSlice'
-import * as formik from 'formik'
 import { toast } from 'react-hot-toast'
+import Input from '../components/Input'
+import Container from '../components/Container'
+import FormContainer from '../components/FormContainer'
 
 const LoginScreen = () => {
-    const [showPassword, setShowPassword] = useState(false)
-
-    const { Formik } = formik
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const { user } = useSelector((state) => state.auth)
 
@@ -25,11 +23,12 @@ const LoginScreen = () => {
 
     const [login, { isLoading }] = useLoginMutation()
 
-    const handleLoginSubmitForm = async (values) => {
+    const handleLoginSubmitForm = async (e) => {
+        e.preventDefault()
         try {
             const response = await login({
-                email: values.email,
-                password: values.password
+                email: email,
+                password: password
             }).unwrap()
             dispatch(setCredentials({ ...response }))
             navigate(redirect)
@@ -37,10 +36,6 @@ const LoginScreen = () => {
         } catch (error) {
             toast.error(error?.data?.message || error.error)
         }
-    }
-
-    const togglePassword = () => {
-        setShowPassword(!showPassword)
     }
 
     useEffect(() => {
@@ -51,94 +46,62 @@ const LoginScreen = () => {
 
     return (
         <>
-            <Formik
-                validationSchema={loginSchema}
-                onSubmit={handleLoginSubmitForm}
-                initialValues={{
-                    email: '',
-                    password: '',
-                }}
-            >
-                {({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
-                   <section className='bg-gray-50 dark:bg-gray-900'>
-                        <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
-                        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
-          Flowbite    
-      </a>
-                        <Card className='my-3 p-3 rounded'>
-                            <h1 className='text-center text-uppercase'>Login</h1>
+            <Container>
+                <form onSubmit={handleLoginSubmitForm}>
+                    <FormContainer>
+                        <h1 className='text-slate-700 text-3xl font-semibold'>LOGIN</h1>
+                        <Input
+                            id='email'
+                            label='Email'
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            disabled={isLoading}
+                            required
+                        />
+                        <Input
+                            id='password'
+                            label='Password'
+                            type='password'
+                            disabled={isLoading}
+                            value={password}
+                            required
+                            onChange={(e) => setPassword(e.target.value)}
+                            onPaste={(e) => {
+                                e.preventDefault()
+                                toast.error('Cannot paste into password field')
+                                return false
+                            }}
+                        />
 
-                            <Form noValidate onSubmit={handleSubmit}>
+                        <button
+                            type='submit'
+                            disabled={isLoading}
+                            className='
+                                px-4
+                                py-3
+                                bg-slate-700
+                                w-full
+                                text-white
+                                disabled:opacity-75 
+                                disabled:cursor-not-allowed
+                                rounded-md
+                                hover:opacity-75 
+                                transition 
+                                border-slate-700 
+                                flex 
+                                items-center 
+                                justify-center 
+                                gap-2'>
+                            {isLoading ? 'Loading...' : 'Submit'}
+                        </button>
 
-                                <Form.Group className='my-2' controlId="validationFormik01">
-                                    <Form.Label>Email Address</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Email"
-                                        name="email"
-                                        value={values.email}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        isInvalid={!!errors.email}
-                                        isValid={touched.email && !errors.email}
-                                    />
 
-                                    <Form.Control.Feedback type="invalid">
-                                        {touched.email && errors.email}
-                                    </Form.Control.Feedback>
-                                    <Form.Control.Feedback></Form.Control.Feedback>
-                                </Form.Group>
-
-                                <Form.Group className='my-2' controlId="validationFormik02">
-                                    <Form.Label>Password</Form.Label>
-                                    <InputGroup style={{ cursor: 'pointer' }}>
-                                        <Form.Control
-                                            name="password"
-                                            type={showPassword ? 'text' : 'password'}
-                                            placeholder="Password"
-                                            value={values.password}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            isInvalid={!!errors.password}
-                                            isValid={touched.password && !errors.password}
-                                        />
-                                        <InputGroup.Text onClick={togglePassword}>
-                                            {showPassword ? <FaEye /> : <FaEyeSlash />}
-                                        </InputGroup.Text>
-                                        <Form.Control.Feedback type="invalid">
-                                            {touched.password && errors.password}
-                                        </Form.Control.Feedback>
-                                        <Form.Control.Feedback></Form.Control.Feedback>
-                                    </InputGroup>
-                                </Form.Group>
-
-                                <div className="d-grid gap-1">
-                                    <Button
-                                        type='submit'
-                                        variant="primary"
-                                        disabled={isLoading}
-                                    >
-                                        {isLoading ? 'Loading…' : 'Submit'}
-                                    </Button>
-                                </div>
-                            </Form>
-
-                            <div className="d-flex justify-content-center align-items-center">
-                                <Row className='py-3'>
-                                    <Col>
-                                        Don't have an account?{' '}
-                                        <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
-                                            Register
-                                        </Link>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </Card>
-                   </div>
-                   </section>
-                )}
-            </Formik>
+                        <p className='text-sm text-slate-700'>Don't have an account?{' '}
+                            <Link className='underline' to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>
+                        </p>
+                    </FormContainer>
+                </form>
+            </Container>
         </>
     )
 }

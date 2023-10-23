@@ -5,7 +5,7 @@ const Button = ({
     outline,
     small,
     icon,
-    onClick
+    onClick,
 }) => {
     return (
     <button 
