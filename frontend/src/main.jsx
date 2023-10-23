@@ -60,7 +60,7 @@ const router = createBrowserRouter(
 
         {/* Product Pagination Routes */}
         <Route path='/admin/search-products/:keyword' element={<ProductListScreen />} />
-        <Route path='/admin/page/:page' element={<ProductListScreen />} />
+        <Route path='/admin/all-products/page/:page' element={<ProductListScreen />} />
         <Route path='/admin/search-products/:keyword/page/:page' element={<ProductListScreen />} />
       </Route>
 

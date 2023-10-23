@@ -83,7 +83,7 @@ const getUsers = async (req, res) => {
     }
 
     const count = await User.countDocuments({ ...searchCriteria })
-    const users = await User.find({ ...searchCriteria }).sort({ isAdmin: 'desc'})
+    const users = await User.find({ ...searchCriteria })
         .limit(limit)
         .skip(skip)
 

@@ -26,15 +26,15 @@ const ProductListScreen = () => {
                     <Message>{error?.data?.message || error.error}</Message>
                 ) : (
                     <>
-                        <div className="flex items-center justify-between bg-slate-200 p-3 rounded">
-                            <h1 className="text-3xl font-semibold text-slate-700">
+                        <div className="flex items-center justify-between bg-slate-200 px-5 py-3 rounded">
+                            <h1 className="text-3xl font-semibold text-slate-700 uppercase">
                                 Products
                             </h1>
                             <SearchBox isAdmin={true} searchType='admin-products' placeholder='Search Products...' />
                         </div>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-md">
                             <table className="w-full text-sm text-slate-700 mt-3">
-                                <thead className="text-md text-slate-700 uppercase bg-slate-200">
+                                <thead className="text-md text-slate-100 uppercase bg-slate-800">
                                     <tr>
                                         <th scope="col" className="text-left px-6 py-3">
                                             Product name
@@ -61,7 +61,7 @@ const ProductListScreen = () => {
                                             border-b-[1.5px] 
                                             border-slate-300
                                             bg-white 
-                                            hover:bg-slate-200
+                                            even:bg-slate-200
                                             hover:cursor-pointer
                                     "
                                         >

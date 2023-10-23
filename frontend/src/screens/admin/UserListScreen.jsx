@@ -25,15 +25,15 @@ const UserListScreen = () => {
                     <Message>{error?.data?.message || error.error}</Message>
                 ) : (
                     <>
-                        <div className="flex items-center justify-between bg-slate-200 p-3 rounded">
-                            <h1 className="text-3xl font-semibold text-slate-700">
+                        <div className="flex items-center justify-between bg-slate-200 px-5 py-3 rounded">
+                            <h1 className="text-3xl font-semibold text-slate-700 uppercase">
                                 Users
                             </h1>
                             <SearchBox searchType='users' placeholder='Search Users...' isAdmin={true} />
                         </div>
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-md">
                             <table className="w-full text-sm text-slate-700 mt-3">
-                                <thead className="text-md text-slate-700 uppercase bg-slate-200">
+                                <thead className="text-md text-slate-200 uppercase bg-slate-800">
                                     <tr>
                                         <th scope="col" className="text-left px-6 py-3">
                                             Name
