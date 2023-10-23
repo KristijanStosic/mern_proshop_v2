@@ -59,9 +59,9 @@ const router = createBrowserRouter(
         <Route path='/admin/search-users/:keyword/page/:page' element={<UserListScreen />} />
 
         {/* Product Pagination Routes */}
-        <Route path='/admin/all-products/search/:keyword' element={<ProductListScreen />} />
-        <Route path='/admin/all-products/page/:page' element={<ProductListScreen />} />
-        <Route path='/admin/all-products/search/:keyword/page/:page' element={<ProductListScreen />} />
+        <Route path='/admin/search-products/:keyword' element={<ProductListScreen />} />
+        <Route path='/admin/page/:page' element={<ProductListScreen />} />
+        <Route path='/admin/search-products/:keyword/page/:page' element={<ProductListScreen />} />
       </Route>
 
       {/* Private - Registered Users Routes */}

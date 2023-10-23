@@ -3,6 +3,14 @@ import { apiSlice } from './apiSlice'
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
+        getUsers: builder.query({
+            query: ({ keyword, page }) => ({
+              url: USERS_URL,
+              params: { keyword, page }
+            }),
+            keepUnusedDataFor: 5,
+            providesTags: ['Users'],
+        }),
         profile: builder.mutation({
             query: (data) => ({
                 url: `${USERS_URL}/profile`,
@@ -14,5 +22,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 })
 
 export const { 
-    useProfileMutation
+    useGetUsersQuery,
+    useProfileMutation,
 } = usersApiSlice

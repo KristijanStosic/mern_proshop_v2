@@ -13,7 +13,7 @@ const Header = () => {
                     <div className='flex items-center justify-between gap-3 md:gap-0'>
                         <Link to='/' style={{ fontFamily: 'Redressed' }} className='font-bold text-3xl'>ProShop</Link>
                         <div className='hidden md:block'>
-                            <SearchBox />
+                            <SearchBox searchType='products' placeholder='Search products...' />
                         </div>
                         <div className='flex items-center gap-8 md:gap-12'>
                             <CartHeaderCount />
