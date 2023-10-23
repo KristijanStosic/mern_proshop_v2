@@ -1,4 +1,3 @@
-import APIFeatures from "../api-features/apiFeatures.js"
 import Product from "../models/productModel.js"
 
 // @desc    Fetch all products

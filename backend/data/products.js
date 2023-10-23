@@ -24,6 +24,7 @@ const products = [
       countInStock: 7,
       rating: 4.0,
       numberOfReviews: 8,
+      createdAt: '01-04-2023'
     },
     {
       name: 'Cannon EOS 80D DSLR Camera',
@@ -37,6 +38,7 @@ const products = [
       countInStock: 5,
       rating: 3,
       numberOfReviews: 12,
+      createdAt: '01-03-2023'
     },
     {
       name: 'Sony Playstation 5',
@@ -50,6 +52,7 @@ const products = [
       countInStock: 11,
       rating: 5,
       numberOfReviews: 12,
+      createdAt: '01-02-2023'
     },
     {
       name: 'Logitech G-Series Gaming Mouse',
@@ -63,6 +66,7 @@ const products = [
       countInStock: 7,
       rating: 3.5,
       numberOfReviews: 10,
+      createdAt: '01-01-2023'
     },
     {
       name: 'Amazon Echo Dot 3rd Generation',
@@ -76,6 +80,7 @@ const products = [
       countInStock: 0,
       rating: 4,
       numberOfReviews: 12,
+      createdAt: '01-08-2023'
     },
   ];
   

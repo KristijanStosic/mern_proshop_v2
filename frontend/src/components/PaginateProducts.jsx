@@ -13,7 +13,7 @@ const PaginateProducts = ({ pages, page, isAdmin = false, keyword = '' }) => {
                                 ? keyword
                                     ? `/search/${keyword}/page/${x + 1}`
                                     : `/page/${x + 1}`
-                                : `/admin/all-products/${x + 1}`
+                                : `/admin/all-products/page/${x + 1}`
                         }
                     >
                         <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item>
