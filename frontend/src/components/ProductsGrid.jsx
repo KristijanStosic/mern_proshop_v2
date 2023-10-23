@@ -23,7 +23,7 @@ const ProductsGrid = ({ product }) => {
     }
 
     return (
-        <div className='cursor-pointer border-[1px] border-slate-300 bg-slate-50 rounded-md p-2 transition hover:scale-105 text-center text-sm text-slate-700'>
+        <div className='cursor-pointer group border-[1px] border-slate-300 bg-slate-50 rounded-md p-2 transition hover:scale-105 text-center text-sm text-slate-700 relative'>
             <div className='flex flex-col items-center w-full gap-3'>
                 <div className='aspect-square overflow-hidden relative w-full'>
                     <Link to={`/product/${product._id}`}>
@@ -53,12 +53,12 @@ const ProductsGrid = ({ product }) => {
                 <div className='text-2xl font-semibold'>
                     ${product.price}
                 </div>
-                <div>
+                <div className='hidden absolute items-center right-0 pr-2 group-hover:block'>
                     <Button
                         onClick={() => addToCartHandler(product._id, product.name)}
                         type='button'
+                        outline
                         disabled={product.countInStock === 0}
-                        buttonText='Add To Cart'
                         small
                         icon={<FaShoppingCart size={16} />}
                     >
