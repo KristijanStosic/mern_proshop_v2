@@ -1,7 +1,7 @@
 const Backdrop = ({ onClick }) => {
     return (
     <div onClick={onClick} 
-        className="z-10 
+        className="z-1 
         bg-slate-200 
         opacity-50 
         w-screen 

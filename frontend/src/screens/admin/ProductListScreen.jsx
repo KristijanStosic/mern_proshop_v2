@@ -118,7 +118,7 @@ const ProductListScreen = () => {
                 </Container>
             </div>
             {openModal && <CreateProductModal closeCreateModal={closeCreateModal} />}
-            {openModal ? <Backdrop onClick={closesCreateModal} /> : null}
+            {openModal ? <Backdrop onClick={closeCreateModal} /> : null}
         </>
 
     )
