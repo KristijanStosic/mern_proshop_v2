@@ -17,6 +17,8 @@ const CreateProductModal = ({ closeCreateModal }) => {
   return (
     <>
       <div className='fixed top-4 right-0 left-0 z-50 flex justify-center items-center'>
+
+        
         {/* Main modal */}
         <div className="w-full max-w-2xl h-full md:h-auto  overflow-hidden">
 
