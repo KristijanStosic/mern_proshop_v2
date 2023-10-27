@@ -15,10 +15,13 @@ const UserListScreen = () => {
 
     return (
         <div className="p-8">
+
             <Container>
+
                 <div className="max-w-[100px] pb-3">
                     {keyword && <GoBackButton />}
                 </div>
+
                 {isLoading || isFetching ? (
                     <Loader />
                 ) : error ? (
@@ -31,9 +34,13 @@ const UserListScreen = () => {
                             </h1>
                             <SearchBox searchType='users' placeholder='Search Users...' isAdmin={true} />
                         </div>
+
                         <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-md">
+
                             <table className="w-full text-sm text-slate-700 mt-3">
+
                                 <thead className="text-md text-slate-200 uppercase bg-slate-800">
+
                                     <tr>
                                         <th scope="col" className="text-left px-6 py-3">
                                             Name
@@ -48,46 +55,75 @@ const UserListScreen = () => {
                                             <span>Actions</span>
                                         </th>
                                     </tr>
+
                                 </thead>
+
                                 <tbody>
                                     {data.users.map((user) => (
-                                        <tr key={user._id} className="
+                                        <tr key={user._id} 
+                                        className="
                                             border-b-[1.5px] 
-                                            border-slate-300
-                                            bg-white 
-                                            hover:bg-slate-200
+                                          border-slate-300
+                                          bg-white 
+                                          hover:bg-slate-200
                                             hover:cursor-pointer
-                                            "
+                                        "
                                         >
-                                            <td className="text-left px-6 py-4 font-medium text-slate-850 text-lg whitespace-nowrap">
+                                            <td 
+                                            className="
+                                                text-left 
+                                                px-6 
+                                                py-4 
+                                                font-medium 
+                                                text-slate-850 
+                                                text-lg 
+                                                whitespace-nowrap
+                                            "
+                                            >
                                                 {user.name}
                                             </td>
+
                                             <td className="text-center text-md">
                                                 {user.email}
                                             </td>
+
                                             <td className="text-center text-md">
+
                                                 <div className="flex items-center justify-center">
                                                     {user.isAdmin ? (
-                                                        <FaCheck className="text-green-500" />
+                                                        <FaCheck className="text-green-600" />
                                                     ) : (
-                                                        <FaTimes className="text-rose-500" />
+                                                        <FaTimes className="text-rose-600" />
                                                     )}
                                                 </div>
+
                                             </td>
+
                                             <td className="px-6 py-4">
-                                                <div className="flex items-center justify-end gap-3">
-                                                    <Link className="text-blue-600 hover:opacity-75" to={`/admin/user/${user._id}`}>
+                                                
+                                                <div className="flex items-center justify-end gap-3">                                               
+                                                    <Link 
+                                                        className="text-blue-600 hover:opacity-75" 
+                                                        to={`/admin/user/${user._id}`}
+                                                    >
                                                         <FaEye size={20} />
                                                     </Link>
-                                                    <Link className="text-slate-800 hover:opacity-75" to={`/update-user/${user._id}`}>
+
+                                                    <Link 
+                                                        className="text-slate-800 hover:opacity-75" 
+                                                        to={`/update-user/${user._id}`}
+                                                    >
                                                         <FaPen size={20} />
                                                     </Link>
+
                                                     <FaTrash className="text-rose-600 hover:opacity-75" size={20} />
                                                 </div>
+
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
+                                
                             </table>
                         </div>
                         <div className="p-4">

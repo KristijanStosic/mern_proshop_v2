@@ -8,8 +8,8 @@ export const usersApiSlice = apiSlice.injectEndpoints({
               url: USERS_URL,
               params: { keyword, page }
             }),
+            providesTags: ['User'],
             keepUnusedDataFor: 5,
-            providesTags: ['Users'],
         }),
         getProfile: builder.query({
             query: () => ({

@@ -40,17 +40,9 @@ const ProfileScreen = () => {
         if (password !== confirmPassword) {
             toast.error('Passwords do not match')
         } else {
+            const userData = { name, email, password, dateOfBirth, gender, biography, image, phone }
             try {
-                const res = await updateProfile({
-                    name,
-                    email,
-                    password,
-                    dateOfBirth,
-                    gender,
-                    biography,
-                    image,
-                    phone
-                }).unwrap()
+                const res = await updateProfile(userData).unwrap()
                 dispatch(setCredentials({ ...res }))
                 toast.success('Profile updated successfully')
                 refetch()
@@ -113,6 +105,7 @@ const ProfileScreen = () => {
                         <Loader />
                     ) : (
                         <FormContainer>
+
                             <h1 className='text-slate-700 text-3xl font-semibold'>
                                 MY PROFILE
                             </h1>
@@ -198,15 +191,16 @@ const ProfileScreen = () => {
                             {uploadStart && (
                                 <div className="w-full bg-gray-200 rounded-full">
                                     <div
-                                        className="
-                                  bg-blue-600 
-                                    text-xs 
-                                    font-medium 
-                                  text-blue-100 
-                                    text-center 
-                                    p-2 
-                                    leading-none 
-                                    rounded-full"
+                                    className="
+                                      bg-blue-600 
+                                        text-xs 
+                                        font-medium 
+                                      text-blue-100 
+                                        text-center 
+                                        p-2 
+                                        leading-none 
+                                        rounded-full
+                                    "
                                         style={{ width: `${uploadProgress}%` }}
                                     >
                                         {uploadProgress}%
@@ -219,8 +213,8 @@ const ProfileScreen = () => {
                                 disabled={loadingUpdateProfile}
                                 buttonText={loadingUpdateProfile ? <LoadingButton /> : 'Submit'}
                             />
-                        </FormContainer>
 
+                        </FormContainer>
                     )}
                 </form>
             </Container>
