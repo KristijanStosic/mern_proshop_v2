@@ -9,6 +9,7 @@ import Button from '../components/Button'
 import Container from '../components/Container'
 import FormContainer from '../components/FormContainer'
 import LoadingButton from '../components/LoadingButton'
+import PasswordInput from '../components/PasswordInput'
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
@@ -25,7 +26,7 @@ const LoginScreen = () => {
 
     const [login, { isLoading }] = useLoginMutation()
 
-    const handleLoginSubmitForm = async (e) => {
+    const loginHandler = async (e) => {
         e.preventDefault()
         try {
             const response = await login({
@@ -49,7 +50,7 @@ const LoginScreen = () => {
     return (
         <>
             <Container>
-                <form onSubmit={handleLoginSubmitForm}>
+                <form onSubmit={loginHandler}>
                     <FormContainer>
                         <h1 className='text-slate-700 text-3xl font-semibold'>LOGIN</h1>
                         <Input
@@ -60,7 +61,7 @@ const LoginScreen = () => {
                             disabled={isLoading}
                             required
                         />
-                        <Input
+                        <PasswordInput
                             id='password'
                             label='Password'
                             type='password'

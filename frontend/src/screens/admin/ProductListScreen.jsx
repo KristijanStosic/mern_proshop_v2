@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Link, useParams } from "react-router-dom"
 import { useGetProductsQuery } from "../../slices/productsApiSlice"
 import { convertToNumber } from '../../utils/cartUtils'
@@ -10,18 +9,11 @@ import Message from "../../components/Message"
 import GoBackButton from "../../components/GoBackButton"
 import SearchBox from "../../components/SearchBox"
 import Button from "../../components/Button"
-import CreateProductModal from "../../modals/CreateProductModal"
-import Backdrop from '../../components/Backdrop'
 
 const ProductListScreen = () => {
-    const [openModal, setOpenModal] = useState(false)
-
     const { keyword, page } = useParams()
 
     const { data, isLoading, isFetching, error } = useGetProductsQuery({ keyword, page })
-
-    const openCreateModal = () => setOpenModal(true)
-    const closeCreateModal = () => setOpenModal(false)
 
     return (
         <>
@@ -42,7 +34,9 @@ const ProductListScreen = () => {
                                 </h1>
                                 <div className="flex items-center justify-end gap-3">
                                     <SearchBox isAdmin={true} searchType='admin-products' placeholder='Search Products...' />
-                                    <Button onClick={openCreateModal} buttonText='Create Product' icon={<FaPlus />} />
+                                    <Link to='/admin/create-product'>
+                                        <Button buttonText='New Product' icon={<FaPlus />} />
+                                    </Link>
                                 </div>
                             </div>
                             <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-sm">
@@ -71,34 +65,34 @@ const ProductListScreen = () => {
                                             <tr
                                                 key={product._id}
                                                 className="
-                                            border-b-[1.5px] 
-                                            border-slate-300
-                                            bg-white 
-                                            even:bg-slate-200
-                                            hover:cursor-pointer
-                                    "
+                                                border-b-[1.5px] 
+                                              border-slate-300
+                                              bg-white 
+                                              hover:bg-slate-200
+                                                hover:cursor-pointer
+                                            "
                                             >
                                                 <td className="text-left px-6 py-4 font-medium text-slate-850 text-lg whitespace-nowrap">
                                                     {product.name}
                                                 </td>
-                                                <td className="text-center text-md px-6 py-4">
+                                                <td className="text-center text-md">
                                                     {product.countInStock}
                                                 </td>
-                                                <td className="text-center text-md px-6 py-4">
+                                                <td className="text-center text-md">
                                                     {product.category}
                                                 </td>
-                                                <td className="text-center text-md px-6 py-4">
+                                                <td className="text-center font-medium text-md">
                                                     ${convertToNumber(product.price)}
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <div className="flex items-center justify-end gap-3">
-                                                        <Link className="text-blue-500 hover:opacity-75" to={`/product/${product._id}`}>
+                                                        <Link className="text-blue-600 hover:opacity-75" to={`/product/${product._id}`}>
                                                             <FaEye size={20} />
                                                         </Link>
-                                                        <Link className="text-purple-500 hover:opacity-75" to={`/update-product/${product._id}`}>
+                                                        <Link className="text-slate-800 hover:opacity-75" to={`/update-product/${product._id}`}>
                                                             <FaPen size={20} />
                                                         </Link>
-                                                        <FaTrash className="text-rose-500 hover:opacity-75" size={20} />
+                                                        <FaTrash className="text-rose-600 hover:opacity-75" size={20} />
                                                     </div>
                                                 </td>
                                             </tr>
@@ -117,10 +111,7 @@ const ProductListScreen = () => {
                     )}
                 </Container>
             </div>
-            {openModal && <CreateProductModal closeCreateModal={closeCreateModal} />}
-            {openModal ? <Backdrop onClick={closeCreateModal} /> : null}
         </>
-
     )
 }
 

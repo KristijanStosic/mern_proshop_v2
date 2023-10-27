@@ -62,10 +62,10 @@ const UserListScreen = () => {
                                             <td className="text-left px-6 py-4 font-medium text-slate-850 text-lg whitespace-nowrap">
                                                 {user.name}
                                             </td>
-                                            <td className="text-center text-md px-6 py-4">
+                                            <td className="text-center text-md">
                                                 {user.email}
                                             </td>
-                                            <td className="text-center text-md px-6 py-4">
+                                            <td className="text-center text-md">
                                                 <div className="flex items-center justify-center">
                                                     {user.isAdmin ? (
                                                         <FaCheck className="text-green-500" />
@@ -76,13 +76,13 @@ const UserListScreen = () => {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center justify-end gap-3">
-                                                    <Link className="text-blue-500 hover:opacity-75" to={`/user/${user._id}`}>
+                                                    <Link className="text-blue-600 hover:opacity-75" to={`/admin/user/${user._id}`}>
                                                         <FaEye size={20} />
                                                     </Link>
-                                                    <Link className="text-purple-500 hover:opacity-75" to={`/update-user/${user._id}`}>
+                                                    <Link className="text-slate-800 hover:opacity-75" to={`/update-user/${user._id}`}>
                                                         <FaPen size={20} />
                                                     </Link>
-                                                    <FaTrash className="text-rose-500 hover:opacity-75" size={20} />
+                                                    <FaTrash className="text-rose-600 hover:opacity-75" size={20} />
                                                 </div>
                                             </td>
                                         </tr>

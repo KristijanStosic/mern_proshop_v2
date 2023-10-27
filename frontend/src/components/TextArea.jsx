@@ -1,21 +1,20 @@
-const Input = ({ id, label, type, disabled, required, value, onChange, onPaste }) => {
+const TextArea = ({ id, label, type, disabled, required, value, onChange }) => {
     return (
         <div className='w-full relative'>
-            <input
+            <textarea
                 autoComplete="off"
                 id={id}
                 value={value}
                 onChange={onChange}
                 disabled={disabled}
                 type={type}
-                onPaste={onPaste}
                 placeholder=''
+                rows='3'
                 required={required}
                 className={`
                 peer 
                 w-full 
                 p-3 
-                pt-6 
                 text-slate-800
                 outline-none 
                 bg-white 
@@ -54,4 +53,4 @@ const Input = ({ id, label, type, disabled, required, value, onChange, onPaste }
     )
 }
 
-export default Input
+export default TextArea

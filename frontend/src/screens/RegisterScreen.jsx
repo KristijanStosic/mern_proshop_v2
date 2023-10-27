@@ -11,6 +11,7 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import LoadingButton from '../components/LoadingButton'
 import PasswordStrengthIndicator from '../components/PasswordStrengthIndicator'
+import PasswordInput from '../components/PasswordInput'
 
 const RegisterScreen = () => {
     const [name, setName] = useState('')
@@ -30,7 +31,7 @@ const RegisterScreen = () => {
 
     const [register, { isLoading }] = useRegisterMutation()
 
-    const handleRegisterSubmitForm = async (e) => {
+    const registerHandler = async (e) => {
         e.preventDefault()
 
         try {
@@ -64,7 +65,7 @@ const RegisterScreen = () => {
     return (
         <>
             <Container>
-                <form onSubmit={handleRegisterSubmitForm}>
+                <form onSubmit={registerHandler}>
                     <FormContainer>
                         <h1 className='text-slate-700 text-3xl font-semibold'>REGISTER</h1>
 
@@ -86,7 +87,7 @@ const RegisterScreen = () => {
                             disabled={isLoading}
                         />
 
-                        <Input
+                        <PasswordInput
                             id='password'
                             label='Password'
                             type='password'
@@ -101,7 +102,7 @@ const RegisterScreen = () => {
                             }}
                         />
 
-                        <Input
+                        <PasswordInput
                             id='confirmPassword'
                             label='Confirm Password'
                             type='password'

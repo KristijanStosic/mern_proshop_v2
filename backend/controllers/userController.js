@@ -19,7 +19,7 @@ const getUserProfile = async (req, res) => {
         dateOfBirth: user.dateOfBirth,
         gender: user.gender,
         biography: user.biography,
-        avatar: user.avatar,
+        image: user.image,
         phone: user.phone
     })
 }
@@ -28,7 +28,7 @@ const getUserProfile = async (req, res) => {
 // @route PUT /api/users/profile
 // @access Private
 const updateUserProfile = async (req, res) => {
-    const { name, email, password, dateOfBirth, gender, biography, avatar, phone } = req.body
+    const { name, email, password, dateOfBirth, gender, biography, image, phone } = req.body
 
     const user = await User.findById(req.user._id)
 
@@ -38,7 +38,7 @@ const updateUserProfile = async (req, res) => {
         user.dateOfBirth = dateOfBirth || user.dateOfBirth
         user.gender = gender || user.gender
         user.biography = biography || user.biography
-        user.avatar = avatar || user.avatar
+        user.image = image || user.image
         user.phone = phone || user.phone
 
         if (password) {
@@ -55,7 +55,7 @@ const updateUserProfile = async (req, res) => {
             dateOfBirth: updatedUser.dateOfBirth,
             gender: updatedUser.gender,
             biography: updatedUser.biography,
-            avatar: updatedUser.avatar,
+            image: updatedUser.image,
             phone: updatedUser.phone
         })
     } else {
