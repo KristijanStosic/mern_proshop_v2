@@ -66,7 +66,7 @@ const Rating = ({ rating, numberOfReviews }) => {
                     {numberOfReviews === 0
                         ? 'No reviews'
                         : numberOfReviews === 1
-                            ? '1 Review'
+                            ? `${numberOfReviews} Review`
                             : `${numberOfReviews} Reviews`}
                 </span>
             )}

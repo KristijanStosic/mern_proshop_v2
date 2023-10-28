@@ -13,7 +13,7 @@ import Message from '../components/Message'
 import HorizontalLine from '../components/HorizontalLine'
 import Button from '../components/Button'
 import Badge from '../components/Badge'
-import ReviewsProduct from '../components/ReviewsProduct'
+import Reviews from '../components/Reviews'
 import CreateProductReview from '../components/CreateProductReview'
 
 const ProductScreen = () => {
@@ -146,28 +146,31 @@ const ProductScreen = () => {
               <div className='grid grid-cols-2 gap-8'>
 
                 <div className='mt-10'>
-                  <ReviewsProduct product={product} />
+                  <Reviews product={product} />
                 </div>
 
-                {user ? (
+                {user && !user.isAdmin && (
                   <>
                     <div className='mt-10'>
                       <CreateProductReview product={product} />
                     </div>
-
                   </>
-                ) : (
-                  <div className='flex flex-col items-center mt-10'>
-                    <div className='bg-slate-700 text-white px-4 py-3 rounded-md w-full'>
-                      <Link to='/login'
-                        className='flex items-center gap-1'>
+                )}
+
+                {!user && (
+                  <>
+                    <div className='flex flex-col items-center mt-10'>
+                      <div className='bg-slate-700 text-white px-4 py-3 rounded-md w-full'>
+                        <Link to='/login'
+                          className='flex items-center gap-1'>
                           <FaArrowLeft />
-                          Please 
-                            <span className='underline text-md'>LOGIN </span>
+                          Please
+                          <span className='underline text-md'>LOGIN </span>
                           to write a review
-                      </Link>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
+                  </>
                 )}
 
               </div>

@@ -38,13 +38,16 @@ const CreateProductReview = ({ product }) => {
         }
     }
 
-    const alreadyReviewed = product.reviews.some((review) => review.user._id === user._id.toString())
+    const alreadyReviewed = 
+        product.reviews.some((review) => review.user._id === user._id.toString())
 
     return (
         <>
             {alreadyReviewed ? (
                 <div className="bg-slate-100 border px-3 py-2 rounded-md shadow-md">
-                    <h1 className="text-2xl text-slate-700 font-semibold">You have already reviewed this product</h1>
+                    <h1 className="text-2xl text-slate-700 font-semibold">
+                        You have already reviewed this product
+                    </h1>
                 </div>
             ) : (
                 <div>

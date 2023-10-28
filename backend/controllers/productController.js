@@ -1,4 +1,5 @@
 import Product from "../models/productModel.js"
+import User from "../models/userModel.js"
 
 // @desc    Fetch all products
 // @route   GET /api/products
@@ -91,6 +92,13 @@ const createProductReview = async (req, res) => {
   const { rating, comment } = req.body
 
   const product = await Product.findById(req.params.id)
+
+  const user = await User.findById(req.user._id)
+
+  if (user.isAdmin) {
+    res.status(404)
+    throw new Error('Admin cannot review product')
+  }
 
   if (product) {
     const alreadyReviewed = product.reviews.find(
