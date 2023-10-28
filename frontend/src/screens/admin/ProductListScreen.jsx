@@ -122,7 +122,7 @@ const ProductListScreen = () => {
 
                                                         <Link 
                                                             className="text-slate-800 hover:opacity-75" 
-                                                            to={`/update-product/${product._id}`}
+                                                            to={`/admin/update-product/${product._id}`}
                                                         >
                                                             <FaPen size={20} />
                                                         </Link>

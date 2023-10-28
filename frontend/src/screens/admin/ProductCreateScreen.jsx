@@ -32,8 +32,8 @@ const ProductCreateScreen = () => {
     const createProductHandler = async (e) => {
         e.preventDefault()
 
-        const productData = 
-        { name, image, description, model, brand, category, price, countInStock }
+        const productData =
+            { name, image, description, model, brand, category, price, countInStock }
 
         try {
             await createProduct(productData).unwrap()
@@ -153,18 +153,31 @@ const ProductCreateScreen = () => {
                             disabled={loadingCreate}
                         />
 
-                        <Input
-                            id='image'
-                            label='Image'
+                        <input
                             onChange={uploadImageHandler}
-                            type='file'
-                            disabled={loadingUpload}
+                            type="file"
+                            className="
+                                    cursor-pointer 
+                                    hover:cursor-pointer
+                                    text-sm 
+                                    text-slate-700
+                                    file:mr-4 
+                                    file:py-2 
+                                    file:px-4 
+                                    file:rounded-md
+                                    file:border-0 
+                                    file:text-md 
+                                    file:font-medium
+                                  file:bg-slate-50 
+                                  file:text-slate-800
+                                  hover:file:bg-slate-300
+                                "
                         />
 
                         {uploadStart && (
                             <div className="w-full bg-gray-200 rounded-full">
                                 <div
-                                className="
+                                    className="
                                   bg-blue-600 
                                     text-xs 
                                     font-medium 

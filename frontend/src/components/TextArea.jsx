@@ -1,4 +1,4 @@
-const TextArea = ({ id, label, type, disabled, required, value, onChange }) => {
+const TextArea = ({ id, label, type, disabled, placeholder, required, value, onChange, page }) => {
     return (
         <div className='w-full relative'>
             <textarea
@@ -8,8 +8,8 @@ const TextArea = ({ id, label, type, disabled, required, value, onChange }) => {
                 onChange={onChange}
                 disabled={disabled}
                 type={type}
-                placeholder=''
-                rows='3'
+                placeholder={placeholder}
+                rows='4'
                 required={required}
                 className={`
                 peer 
@@ -29,21 +29,10 @@ const TextArea = ({ id, label, type, disabled, required, value, onChange }) => {
             />
             <label
                 className={`
-                    absolute 
-                    cursor-text 
-                    text-md 
-                  text-slate-700
-                    duration-150 
-                    transform 
-                    -translate-y-3 
-                    top-5 
-                    z-10 
-                    origin-[0] 
-                    left-4
-                    peer-placeholder-shown:scale-100 
-                    peer-placeholder-shown:translate-y-0 
-                    peer-focus:scale-75 
-                    peer-focus:-translate-y-4
+                    ${page === 'profile' 
+                    ? 'absolute left-4 text-slate-800 text-sm top-0' 
+                    : 'absolute cursor-text text-mdtext-slate-700  duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:scale-75 peer-focus:-translate-y-4'}
+                    
                 `
                 }
                 htmlFor={id}>

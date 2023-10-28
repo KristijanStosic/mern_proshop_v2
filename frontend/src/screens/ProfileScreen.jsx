@@ -14,6 +14,9 @@ import Select from "../components/Select"
 import Loader from "../components/Loader"
 import Avatar from "../components/Avatar"
 import LoadingButton from "../components/LoadingButton"
+import Message from "../components/Message"
+import ProfileInput from "../components/ProfileInput"
+import ProfileTextArea from "../components/ProfileTextArea"
 
 const ProfileScreen = () => {
     const dispatch = useDispatch()
@@ -27,9 +30,6 @@ const ProfileScreen = () => {
     const [biography, setBiography] = useState('')
     const [image, setImage] = useState('')
     const [phone, setPhone] = useState('')
-
-    const [uploadProgress, setUploadProgress] = useState(0)
-    const [uploadStart, setUploadStart] = useState(false)
 
     const { data, isLoading, error, refetch } = useGetProfileQuery()
 
@@ -54,7 +54,6 @@ const ProfileScreen = () => {
 
     const uploadImageHandler = async (e) => {
         e.preventDefault()
-        setUploadStart(true)
         const file = e.target.files[0]
         const formData = new FormData()
         formData.append('image', file)
@@ -66,10 +65,6 @@ const ProfileScreen = () => {
             const config = {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                },
-                onUploadProgress: (event) => {
-                    const progress = Math.round((event.loaded / event.total) * 100)
-                    setUploadProgress(progress)
                 }
             }
 
@@ -79,7 +74,6 @@ const ProfileScreen = () => {
             setImage(data.image)
         } catch (error) {
             toast.error(error?.data?.message || error.error)
-            setUploadStart(false)
             setImage('')
         }
     }
@@ -103,6 +97,8 @@ const ProfileScreen = () => {
                 <form onSubmit={updateProfileHandler}>
                     {isLoading ? (
                         <Loader />
+                    ) : error ? (
+                        <Message>{error?.data?.message || error.error}</Message>
                     ) : (
                         <FormContainer>
 
@@ -110,19 +106,21 @@ const ProfileScreen = () => {
                                 MY PROFILE
                             </h1>
 
-                            <Input
+                            <ProfileInput 
                                 id='name'
-                                label='Name'
-                                onChange={(e) => setName(e.target.value)}
                                 value={name}
+                                type='text'
+                                placeholder='Write your name here'
+                                onChange={(e) => setName(e.target.value)}
                                 disabled={loadingUpdateProfile}
                             />
 
-                            <Input
+                            <ProfileInput
                                 id='email'
-                                label='Email'
-                                onChange={(e) => setEmail(e.target.value)}
                                 value={email}
+                                type='text'
+                                placeholder='Write your email here'
+                                onChange={(e) => setEmail(e.target.value)}
                                 disabled={loadingUpdateProfile}
                             />
 
@@ -151,11 +149,11 @@ const ProfileScreen = () => {
                                 disabled={loadingUpdateProfile}
                             />
 
-                            <Input
+                            <ProfileInput
                                 id='phone'
-                                label='Phone'
-                                onChange={(e) => setPhone(e.target.value)}
                                 value={phone}
+                                placeholder='Write your phone number here'
+                                onChange={(e) => setPhone(e.target.value)}
                                 type='text'
                                 disabled={loadingUpdateProfile}
                             />
@@ -170,9 +168,10 @@ const ProfileScreen = () => {
                                 disabled={loadingUpdateProfile}
                             />
 
-                            <TextArea
+                            <ProfileTextArea
                                 id='biography'
                                 label='Biography'
+                                placeholder='Write your biography here'
                                 onChange={(e) => setBiography(e.target.value)}
                                 value={biography}
                                 type='text'
@@ -181,32 +180,27 @@ const ProfileScreen = () => {
 
                             <Avatar type='profile' src={data.image} />
 
-                            <Input
-                                id='image'
-                                label='Image'
+                            <label htmlFor="image" className="text-sm text-slate-700 font-semibold">Image</label>
+                            <input
                                 onChange={uploadImageHandler}
-                                type='file'
+                                type="file"
+                                className="
+                                    cursor-pointer 
+                                    hover:cursor-pointer
+                                    text-sm 
+                                    text-slate-700
+                                    file:mr-4 
+                                    file:py-2 
+                                    file:px-4 
+                                    file:rounded-md
+                                    file:border-0 
+                                    file:text-md 
+                                    file:font-medium
+                                  file:bg-slate-50 
+                                  file:text-slate-800
+                                  hover:file:bg-slate-300
+                                "
                             />
-
-                            {uploadStart && (
-                                <div className="w-full bg-gray-200 rounded-full">
-                                    <div
-                                    className="
-                                      bg-blue-600 
-                                        text-xs 
-                                        font-medium 
-                                      text-blue-100 
-                                        text-center 
-                                        p-2 
-                                        leading-none 
-                                        rounded-full
-                                    "
-                                        style={{ width: `${uploadProgress}%` }}
-                                    >
-                                        {uploadProgress}%
-                                    </div>
-                                </div>
-                            )}
 
                             <Button
                                 type='submit'

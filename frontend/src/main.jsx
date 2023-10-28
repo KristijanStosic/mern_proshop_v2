@@ -28,6 +28,7 @@ import ReviewListScreen from './screens/admin/ReviewListScreen'
 import ProductCreateScreen from './screens/admin/ProductCreateScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import UserProfileScreen from './screens/admin/UserProfileScreen'
+import ProductUpdateScreen from './screens/admin/ProductUpdateScreen'
 
 //createRoutesFromElements is a helper that creates route objects from <Route> elements. It's useful if you prefer to create your routes as JSX instead of objects.
 const router = createBrowserRouter(
@@ -57,6 +58,7 @@ const router = createBrowserRouter(
         <Route path='/admin/all-reviews' element={<ReviewListScreen />} />
 
         <Route path='/admin/create-product' element={<ProductCreateScreen />} />
+        <Route path='/admin/update-product/:productId' element={<ProductUpdateScreen />} />
 
         <Route path='/admin/user/:userId' element={<UserProfileScreen />} />
 

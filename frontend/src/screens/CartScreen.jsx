@@ -41,6 +41,7 @@ const CartScreen = () => {
                 ) : (
                     <div>
                         <h1 className='text-center text-3xl text-slate-700 font-semibold'>Shopping Cart</h1>
+                        
                         <div className='grid grid-cols-6 text-sm gap-4 pb-2 items-center mt-10 text-slate-700 font-bold'>
                             <div className='col-span-2 justify-self-start'>PRODUCT</div>
                             <div className='justify-self-center'>PRICE</div>
@@ -48,36 +49,48 @@ const CartScreen = () => {
                             <div className='justify-self-center'>TOTAL</div>
                             <div className='justify-self-end'>REMOVE</div>
                         </div>
+
                         <div>
                             {cartItems.map((cartItem) => (
                                 <CartItem key={cartItem._id} cartItem={cartItem} />
                             ))}
                         </div>
+
                         <HorizontalLine />
+
                         <div className='flex justify-between gap-4 py-4 text-slate-700'>
+
                             <div className='w-[90px]'>
+
                                 <Button
                                     buttonText='Clear Cart'
                                     type='button'
                                     small
                                     outline
-                                    onClick={clearCartHandler}>
-                                </Button>
+                                    onClick={clearCartHandler}
+                                />
+
                             </div>
+
                             <div className='flex flex-col gap-1 items-start text-sm'>
+
                                 <div className='flex justify-between w-full font-semibold'>
                                     <span className='text-lg'>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</span>
                                     <span className='text-lg'>${convertToNumber(cart.itemsPrice)}</span>
                                 </div>
+
                                 <p className='text-slate-500'>Taxes and shipping calculated at checkout</p>
+
                                 <Button
                                     buttonText='Checkout'
                                     onClick={checkoutHandler}
-                                ></Button>
+                                />
+
                                 <Link to='/' className='text-slate-500 flex items-center gap-1 mt-2'>
                                     <FaArrowLeft />
                                     <span>Continue Shopping</span>
                                 </Link>
+
                             </div>
                         </div>
                     </div>
