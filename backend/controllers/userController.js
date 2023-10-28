@@ -99,21 +99,57 @@ const getUsers = async (req, res) => {
 // @route GET /api/users/:id
 // @access Private/Admin
 const getUserById = async (req, res) => {
-    res.send('get user by id')
+    const user = await User.findbyId(req.params.id).select('-password')
+
+    if (!user) {
+        res.status(404)
+        throw new Error('User not found')
+    }
+
+    res.status(200).json(user)
 }
 
 // @desc Update user
 // @route PUT /api/users/:id
 // @access Private/Admin
 const updateUser = async (req, res) => {
-    res.send('update user by id')
+    const { name, email, isAdmin } = req.body
+
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+        res.status(404)
+        throw new Error('User not found')
+    }
+
+    user.name = name || user.name 
+    user.email = email || user.email 
+    user.isAdmin = Boolean(isAdmin)
+
+    const updatedUser = await user.save() 
+
+    res.status(200).json(updatedUser)
 }
 
 // @desc Delete user
 // @route DELETE /api/users/:id
 // @access Private/Admin
 const deleteUser = async (req, res) => {
-    res.send('delete user')
+    const user = await User.findbyId(req.params.id)
+
+    if (!user) {
+        res.status(404)
+        throw new Error('User not found')
+    }
+
+    if (user.isAdmin) {
+        res.status(409)
+        throw new Error('Admin cannot be deleted')
+    }
+
+    await User.deleteOne({ _id: user._id })
+
+    res.status(200).json({ message: 'User deleted' })
 }
 
 export {
