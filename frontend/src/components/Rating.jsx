@@ -4,7 +4,18 @@ const Rating = ({ rating, numberOfReviews }) => {
     return (
         <div className='flex items-center gap-3'>
             <div className='flex text-xl text-rose-600 gap-1'>
-                <span>
+               {[1, 2, 3, 4, 5].map((star, index) => (
+                <span key={index}>
+                    {rating >= star ? (
+                        <FaStar />
+                    ) : rating >= star - 0.5 ? (
+                        <FaStarHalfAlt />
+                    ) : (
+                        <FaRegStar />
+                    )}
+                </span>
+               ))}
+               {/* <span>
                     {rating >= 1 ? (
                         <FaStar />
                     ) : rating >= 0.5 ? (
@@ -48,16 +59,17 @@ const Rating = ({ rating, numberOfReviews }) => {
                     ) : (
                         <FaRegStar />
                     )}
-                </span>
+                </span> */}
             </div>
-            <span className='text-md text-slate-700 font-medium'>
-                {`${numberOfReviews === 0 ? '' : numberOfReviews} ${numberOfReviews === 0
-                    ? 'No reviews'
-                    : numberOfReviews === 1
-                        ? 'Review'
-                        : 'Reviews'
-                    }`}
-            </span>
+            {numberOfReviews !== undefined && (
+                <span className='text-md text-slate-700 font-medium'>
+                    {numberOfReviews === 0
+                        ? 'No reviews'
+                        : numberOfReviews === 1
+                            ? '1 Review'
+                            : `${numberOfReviews} Reviews`}
+                </span>
+            )}
         </div>
     )
 }

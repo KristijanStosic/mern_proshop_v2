@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useGetProductByIdQuery } from '../slices/productsApiSlice'
 import { addToCart } from '../slices/cartSlice'
-import { FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingCart, FaArrowLeft } from 'react-icons/fa'
 import { toast } from 'react-hot-toast'
 import Rating from '../components/Rating'
 import Container from '../components/Container'
@@ -13,11 +13,14 @@ import Message from '../components/Message'
 import HorizontalLine from '../components/HorizontalLine'
 import Button from '../components/Button'
 import Badge from '../components/Badge'
+import ReviewsProduct from '../components/ReviewsProduct'
+import CreateProductReview from '../components/CreateProductReview'
 
 const ProductScreen = () => {
   const { productId } = useParams()
 
   const { cartItems } = useSelector((state) => state.cart)
+  const { user } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -60,13 +63,17 @@ const ProductScreen = () => {
                   <img src={product.image} alt={product.name} className='object-cover h-full w-full rounded' />
                 </div>
                 <div className='flex flex-col gap-1 text-sm text-slate-700'>
+
                   <h2 className='text-2xl font-semibold'>
                     {product.name}
                   </h2>
+
                   <div className='mt-2'>
                     <Rating rating={product.rating} numberOfReviews={product.numberOfReviews} />
                   </div>
+
                   <HorizontalLine />
+
                   <div className='flex flex-col'>
                     <div className='text-xl'>
                       <span className='font-semibold'>CATEGORY: </span>{product.category}
@@ -78,23 +85,32 @@ const ProductScreen = () => {
                       <span className='font-semibold'>MODEL: </span>{product.model}
                     </div>
                   </div>
+
                   <HorizontalLine />
+
                   <div className='text-justify text-xl'>
                     <span className='font-bold'>DESCRIPTION: </span>{product.description}
                   </div>
+
                   <HorizontalLine />
                 </div>
+
                 <div className='h-max px-6 py-3 bg-white border border-gray-200 rounded-md shadow-md'>
+
                   <div className='text-2xl text-slate-700'>
                     <span className='font-semibold'>PRICE: </span> ${product.price}
                   </div>
+
                   <HorizontalLine />
+
                   <div>
                     <span className='font-semibold'>Available: </span>
                     <Badge countInStock={product.countInStock} />
+
                     <HorizontalLine />
 
                     <span className='font-semibold'>Quantity: </span>
+
                     <select
                       aria-label="Default select example"
                       className='cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md px-5 py-1 ml-2'
@@ -125,6 +141,37 @@ const ProductScreen = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Reviews */}
+              <div className='grid grid-cols-2 gap-8'>
+
+                <div className='mt-10'>
+                  <ReviewsProduct product={product} />
+                </div>
+
+                {user ? (
+                  <>
+                    <div className='mt-10'>
+                      <CreateProductReview product={product} />
+                    </div>
+
+                  </>
+                ) : (
+                  <div className='flex flex-col items-center mt-10'>
+                    <div className='bg-slate-700 text-white px-4 py-3 rounded-md w-full'>
+                      <Link to='/login'
+                        className='flex items-center gap-1'>
+                          <FaArrowLeft />
+                          Please 
+                            <span className='underline text-md'>LOGIN </span>
+                          to write a review
+                      </Link>
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
             </Container>
           </div>
         </>

@@ -17,7 +17,7 @@ const getProducts = async (req, res) => {
       { brand: { $regex: req.query.keyword, $options: 'i' } },
       { category: { $regex: req.query.keyword, $options: 'i' } },
       { model: { $regex: req.query.keyword, $options: 'i' } }
-    ];
+    ]
   }
 
   let sortOptions = {}
@@ -47,7 +47,7 @@ const getProducts = async (req, res) => {
 // @route   GET /api/products/:id
 // @access  Public
 const getProductById = async (req, res) => {
-  const product = await Product.findById(req.params.id)
+  const product = await Product.findById(req.params.id).populate('reviews.user')
 
   if (!product) {
     res.status(404)
@@ -84,4 +84,46 @@ const createProduct = async (req, res) => {
   }
 }
 
-export { getProducts, getProductById, createProduct }
+// @desc    Create new review
+// @route   POST /api/products/:id/new-review
+// @access  Private
+const createProductReview = async (req, res) => {
+  const { rating, comment } = req.body
+
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    const alreadyReviewed = product.reviews.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    )
+
+    if (alreadyReviewed) {
+      res.status(400)
+      throw new Error('Product already reviewed')
+    }
+
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id,
+    }
+
+    product.reviews.push(review)
+
+    product.numberOfReviews = product.reviews.length
+
+    product.rating =
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+      product.reviews.length
+
+    await product.save()
+    
+    res.status(201).json({ message: 'Review added' })
+  } else {
+    res.status(404)
+    throw new Error('Product not found')
+  }
+}
+
+export { getProducts, getProductById, createProduct, createProductReview }

@@ -9,8 +9,28 @@ const products = [
       model: 'MQ573SX/A',
       price: 89.99,
       countInStock: 10,
-      rating: 4.5,
-      numberOfReviews: 12,
+      rating: 4,
+      numberOfReviews: 3,
+      reviews: [
+        {
+          user: '653d644bb99792647c948cb4',
+          name: 'Sheldon Cooper',
+          rating: 5,
+          comment: 'Absolute perfection of the quality'
+        },
+        {
+          user: '653d645406e2c1be5d089e56',
+          name: 'Marry Cooper',
+          rating: 3,
+          comment: 'Not very good quality'
+        },
+        {
+          user: '653d765a6b69dae9bc9ae687',
+          name: 'Missy Cooper',
+          rating: 4,
+          comment: 'I am satisfied'
+        },
+      ]
     },
     {
       name: 'iPhone 13 Pro 256GB Memory',
@@ -22,9 +42,10 @@ const products = [
       model: 'GQ371SX/G',
       price: 599.99,
       countInStock: 7,
-      rating: 4.0,
-      numberOfReviews: 8,
-      createdAt: '01-04-2023'
+      rating: 0,
+      numberOfReviews: 0,
+      createdAt: '01-04-2023',
+      reviews: []
     },
     {
       name: 'Cannon EOS 80D DSLR Camera',
