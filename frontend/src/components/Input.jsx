@@ -1,4 +1,4 @@
-const Input = ({ id, label, type, disabled, required, value, onChange, onPaste }) => {
+const Input = ({ id, label, type, disabled, required, value, onChange, onPaste, placeholder }) => {
     return (
         <div className='w-full relative'>
             <input
@@ -9,7 +9,7 @@ const Input = ({ id, label, type, disabled, required, value, onChange, onPaste }
                 disabled={disabled}
                 type={type}
                 onPaste={onPaste}
-                placeholder=''
+                placeholder={placeholder}
                 required={required}
                 className={`
                 peer 

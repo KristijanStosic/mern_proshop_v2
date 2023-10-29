@@ -85,6 +85,48 @@ const createProduct = async (req, res) => {
   }
 }
 
+// @desc    Update product
+// @route   PUT /api/products/:id
+// @access  Private/Admin
+const updateProduct = async (req, res) => {
+  const { name, price, description, image, brand, category, model, countInStock } = req.body
+
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    product.name = name
+    product.price = price
+    product.description = description
+    product.image = image
+    product.brand = brand
+    product.model = model
+    product.category = category
+    product.countInStock = countInStock
+
+    const updatedProduct = await product.save()
+
+    res.status(200).json(updatedProduct)
+  } else {
+    res.status(404)
+    throw new Error('Product not found')
+  }
+}
+
+// @desc    Delete product
+// @route   DELETE /api/products/:id
+// @access  Private/Admin
+const deleteProduct = async (req, res) => {
+  const product = await Product.findById(req.params.id)
+
+  if (product) {
+    await Product.deleteOne({ _id: product._id })
+    res.status(200).json({ message: 'Product removed' })
+  } else {
+    res.status(404)
+    throw new Error('Product not found')
+  }
+}
+
 // @desc    Create new review
 // @route   POST /api/products/:id/new-review
 // @access  Private
@@ -126,7 +168,7 @@ const createProductReview = async (req, res) => {
       product.reviews.length
 
     await product.save()
-    
+
     res.status(201).json({ message: 'Review added' })
   } else {
     res.status(404)
@@ -134,4 +176,4 @@ const createProductReview = async (req, res) => {
   }
 }
 
-export { getProducts, getProductById, createProduct, createProductReview }
+export { getProducts, getProductById, createProduct, updateProduct, deleteProduct, createProductReview }

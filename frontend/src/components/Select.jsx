@@ -36,8 +36,9 @@ const Select = ({ id, label, disabled, required, value, onChange, type }) => {
                         <option defaultValue="">Select category</option>
                         <option value="TV">TV/Monitors</option>
                         <option value="PC">PC</option>
-                        <option value="GA">Gaming/Console</option>
-                        <option value="PH">Phones</option>
+                        <option value="Gaming/Console">Gaming/Console</option>
+                        <option value="Phones">Phones</option>
+                        <option value="Electronics">Electronics</option>
                     </>
                 )}
 

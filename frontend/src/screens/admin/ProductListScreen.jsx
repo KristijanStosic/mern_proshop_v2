@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { useGetProductsQuery } from "../../slices/productsApiSlice"
 import { convertToNumber } from '../../utils/cartUtils'
@@ -8,12 +9,27 @@ import PaginateProducts from '../../components/PaginateProducts'
 import Message from "../../components/Message"
 import GoBackButton from "../../components/GoBackButton"
 import SearchBox from "../../components/SearchBox"
+import Backdrop from "../../components/Backdrop"
 import Button from "../../components/Button"
+import DeleteProductModal from "../../components/DeleteProductModal"
 
 const ProductListScreen = () => {
+    const [productData, setProductData] = useState(null)
+    const [openModal, setOpenModal] = useState(false)
+
+    const openDeleteModal = (data) => {
+        setProductData(data)
+        setOpenModal(true)
+    }
+
+    const closeDeleteModal = () => {
+        setOpenModal(false)
+        setProductData(null)
+    }
+
     const { keyword, page } = useParams()
 
-    const { data, isLoading, isFetching, error } = useGetProductsQuery({ keyword, page })
+    const { data, isLoading, error, refetch } = useGetProductsQuery({ keyword, page })
 
     return (
         <>
@@ -24,28 +40,28 @@ const ProductListScreen = () => {
                     <div className="max-w-[100px] pb-3">
                         {keyword && <GoBackButton />}
                     </div>
-                    
-                    {isLoading || isFetching ? (
+
+                    <div className="flex items-center justify-between bg-slate-200 px-5 py-3 rounded">
+
+                        <h1 className="text-3xl font-semibold text-slate-700 uppercase">
+                            Products
+                        </h1>
+
+                        <div className="flex items-center justify-end gap-3">
+                            <SearchBox isAdmin={true} searchType='admin-products' placeholder='Search Products...' />
+                            <Link to='/admin/create-product'>
+                                <Button buttonText='New Product' icon={<FaPlus />} />
+                            </Link>
+                        </div>
+
+                    </div>
+
+                    {isLoading ? (
                         <Loader />
                     ) : error ? (
                         <Message>{error?.data?.message || error.error}</Message>
                     ) : (
                         <>
-                            <div className="flex items-center justify-between bg-slate-200 px-5 py-3 rounded">
-
-                                <h1 className="text-3xl font-semibold text-slate-700 uppercase">
-                                    Products
-                                </h1>
-
-                                <div className="flex items-center justify-end gap-3">
-                                    <SearchBox isAdmin={true} searchType='admin-products' placeholder='Search Products...' />
-                                    <Link to='/admin/create-product'>
-                                        <Button buttonText='New Product' icon={<FaPlus />} />
-                                    </Link>
-                                </div>
-
-                            </div>
-
                             <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-sm">
 
                                 <table className="w-full text-sm text-slate-700 mt-3">
@@ -75,7 +91,7 @@ const ProductListScreen = () => {
                                     <tbody>
                                         {data.products.map((product) => (
                                             <tr key={product._id}
-                                            className="
+                                                className="
                                                 border-b-[1.5px] 
                                               border-slate-300
                                               bg-white 
@@ -83,8 +99,8 @@ const ProductListScreen = () => {
                                                 hover:cursor-pointer
                                             "
                                             >
-                                                <td 
-                                                className="
+                                                <td
+                                                    className="
                                                     text-left 
                                                     px-6 
                                                     py-4 
@@ -113,21 +129,23 @@ const ProductListScreen = () => {
 
                                                     <div className="flex items-center justify-end gap-3">
 
-                                                        <Link 
-                                                            className="text-blue-600 hover:opacity-75" 
+                                                        <Link
+                                                            className="text-blue-600 hover:opacity-75"
                                                             to={`/product/${product._id}`}
                                                         >
                                                             <FaEye size={20} />
                                                         </Link>
 
-                                                        <Link 
-                                                            className="text-slate-800 hover:opacity-75" 
+                                                        <Link
+                                                            className="text-slate-800 hover:opacity-75"
                                                             to={`/admin/update-product/${product._id}`}
                                                         >
                                                             <FaPen size={20} />
                                                         </Link>
 
-                                                        <FaTrash className="text-rose-600 hover:opacity-75" size={20} />
+                                                        <FaTrash
+                                                            onClick={() => openDeleteModal(product)} className="text-rose-600 hover:opacity-75" size={20}
+                                                        />
                                                     </div>
 
                                                 </td>
@@ -148,6 +166,14 @@ const ProductListScreen = () => {
                     )}
                 </Container>
             </div>
+            {openModal &&
+                <DeleteProductModal
+                    refetch={refetch}
+                    product={productData}
+                    closeDeleteModal={closeDeleteModal}
+                />
+            }
+            {openModal && <Backdrop onClick={closeDeleteModal} />}
         </>
     )
 }

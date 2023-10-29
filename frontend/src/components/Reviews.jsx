@@ -29,7 +29,7 @@ const Reviews = ({ product }) => {
                                             <div className='font-medium text-slate-700'>
                                                 {review.name}
                                             </div>
-                                            <div className=' text-slate-500'>
+                                            <div className='text-slate-500'>
                                                 {moment(review.createdAt).fromNow()}
                                             </div>
 
@@ -41,7 +41,7 @@ const Reviews = ({ product }) => {
                                         <div className='mt-2'>
                                             <Rating rating={review.rating} />
                                         </div>
-                                        <div className='mt-2 italic'>
+                                        <div className='mt-2 italic text-justify'>
                                             <span className='font-semibold text-slate-700'>
                                                 Comment: &nbsp;
                                             </span> 

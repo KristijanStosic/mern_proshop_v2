@@ -29,7 +29,7 @@ const TextArea = ({ id, label, type, disabled, placeholder, required, value, onC
             />
             <label
                 className={`
-                    ${page === 'profile' 
+                    ${page === 'profile' || 'product'
                     ? 'absolute left-4 text-slate-800 text-sm top-0' 
                     : 'absolute cursor-text text-mdtext-slate-700  duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:scale-75 peer-focus:-translate-y-4'}
                     

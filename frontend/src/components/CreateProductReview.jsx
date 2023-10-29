@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useCreateReviewMutation, useGetProductByIdQuery } from "../slices/productsApiSlice"
 import { FaStar } from "react-icons/fa"
 import { toast } from 'react-hot-toast'
-import Input from "./Input"
+import TextArea from "./TextArea"
 import Button from "./Button"
 import LoadingButton from "./LoadingButton"
 import { useSelector } from "react-redux"
@@ -13,17 +13,15 @@ const CreateProductReview = ({ product }) => {
 
     const { user } = useSelector((state) => state.auth)
 
-    const { refetch } = useGetProductByIdQuery(productId)
-
     const [rating, setRating] = useState(5)
     const [comment, setComment] = useState('')
     const [hover, setHover] = useState(0)
-
+    
     const [createReview, { isLoading }] = useCreateReviewMutation()
+    const { refetch } = useGetProductByIdQuery(productId)
 
     const createReviewHandler = async (e) => {
         e.preventDefault()
-
         try {
             const res = await createReview({
                 productId,
@@ -55,7 +53,7 @@ const CreateProductReview = ({ product }) => {
                         Write a customer review
                     </h1>
                     <form onSubmit={createReviewHandler}>
-                        <div className="flex flex-col justify-start items-star gap-3 mt-3">
+                        <div className="flex flex-col justify-start items-start gap-3 mt-3">
                             <span className="text-md text-slate-500">
                                 Choose rating from 1 to 5
                             </span>
@@ -81,20 +79,20 @@ const CreateProductReview = ({ product }) => {
                                     )
                                 })}
                             </div>
-                            <Input
+                            
+                            <TextArea
+                                page='product'
                                 id='comment'
-                                label='Comment'
+                                placeholder='Write your comment here'
                                 onChange={(e) => setComment(e.target.value)}
                                 value={comment}
                                 required
                             />
 
-                            <div className="max-w-[50%]">
-                                <Button
-                                    type='submit'
-                                    buttonText={isLoading ? <LoadingButton /> : 'Submit'}
-                                />
-                            </div>
+                            <Button
+                                type='submit'
+                                buttonText={isLoading ? <LoadingButton /> : 'Submit'}
+                            />
                         </div>
                     </form>
                 </div>

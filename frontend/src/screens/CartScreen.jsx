@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { FaArrowLeft } from 'react-icons/fa'
+import { PiShoppingCartLight } from 'react-icons/pi'
 import { toast } from 'react-hot-toast'
 import { convertToNumber } from '../utils/cartUtils'
 import { clearCartItems } from '../slices/cartSlice'
@@ -26,11 +27,16 @@ const CartScreen = () => {
     }
 
     return (
-        <div className='pt-8 px-8'>
+        <div className='pt-8 px-8 mt-20'>
             <Container>
                 {!cartItems || cartItems.length === 0 ? (
                     <div className='flex flex-col items-center'>
-                        <div className='text-3xl text-slate-700 font-semibold'>Your cart is empty</div>
+                        <div className='text-slate-700' style={{ fontSize: '100px'}}>
+                            <PiShoppingCartLight />
+                        </div>
+                        <div className='text-3xl text-slate-700 font-semibold'>
+                            Your cart is empty
+                        </div>
                         <div>
                             <Link to='/' className='text-slate-500 flex items-center gap-1 mt-2'>
                                 <FaArrowLeft />

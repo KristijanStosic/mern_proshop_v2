@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useCreateProductMutation, useUploadProductImageMutation } from "../../slices/productsApiSlice"
+import { useCreateProductMutation } from "../../slices/productsApiSlice"
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 import Container from "../../components/Container"
@@ -27,7 +27,6 @@ const ProductCreateScreen = () => {
     const navigate = useNavigate()
 
     const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
-    const [uploadProductImage, { isLoading: loadingUpload }] = useUploadProductImageMutation()
 
     const createProductHandler = async (e) => {
         e.preventDefault()

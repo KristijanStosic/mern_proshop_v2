@@ -50,7 +50,7 @@ const ProductScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant='error'>{error?.data?.message || error.error}</Message>
+        <Message>{error?.data?.message || error.error}</Message>
       ) : (
         <>
           <div className='p-8'>
