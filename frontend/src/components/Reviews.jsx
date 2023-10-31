@@ -26,10 +26,10 @@ const Reviews = ({ product }) => {
                                             <div className='font-semibold'>
                                                 <Avatar src={review.user.image} />
                                             </div>
-                                            <div className='font-medium text-slate-700'>
+                                            <div className='font-semibold text-slate-700'>
                                                 {review.name}
                                             </div>
-                                            <div className='text-slate-500'>
+                                            <div className='text-slate-500 text-sm'>
                                                 {moment(review.createdAt).fromNow()}
                                             </div>
 

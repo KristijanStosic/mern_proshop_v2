@@ -27,7 +27,7 @@ const CartScreen = () => {
     }
 
     return (
-        <div className='pt-8 px-8 mt-20'>
+        <div className='pt-8 px-8'>
             <Container>
                 {!cartItems || cartItems.length === 0 ? (
                     <div className='flex flex-col items-center'>
