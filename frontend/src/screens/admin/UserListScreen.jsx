@@ -80,7 +80,7 @@ const UserListScreen = () => {
                                                 whitespace-nowrap
                                             "
                                             >
-                                                {user.name}
+                                                {user.firstName} {user.lastName}
                                             </td>
 
                                             <td className="text-center text-md">

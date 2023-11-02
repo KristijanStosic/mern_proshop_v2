@@ -6,6 +6,7 @@ import { logout } from "../slices/authSlice"
 import { FaArrowLeft, FaArrowRight, FaCaretDown, FaCaretUp, FaShoppingBag, FaUserEdit, FaUserPlus } from "react-icons/fa"
 import { MdAdminPanelSettings } from 'react-icons/md'
 import { toast } from 'react-hot-toast'
+import { resetCart } from "../slices/cartSlice"
 import Avatar from "./Avatar"
 import UserMenuItem from "./UserMenuItem"
 import Backdrop from "./Backdrop"
@@ -28,6 +29,7 @@ const UserHeaderMenu = () => {
         try {
             const response = await logoutApiCall().unwrap()
             dispatch(logout())
+            dispatch(resetCart())
             navigate('/login')
             toast.success(response.message)
         } catch (error) {
@@ -54,7 +56,7 @@ const UserHeaderMenu = () => {
                 onClick={toggleUserMenu}
                 >
                     <Avatar src={user?.image} />
-                    {user && user.name}
+                    {user?.firstName} {user?.lastName}
                     {isOpen ? <FaCaretUp /> : <FaCaretDown />}
                 </div>
                 

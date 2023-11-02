@@ -27,6 +27,7 @@ import PrivateRoute from './components/PrivateRoute'
 import ReviewListScreen from './screens/admin/ReviewListScreen'
 import ProductCreateScreen from './screens/admin/ProductCreateScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import ShippingScreen from './screens/ShippingScreen'
 import UserProfileScreen from './screens/admin/UserProfileScreen'
 import ProductUpdateScreen from './screens/admin/ProductUpdateScreen'
 
@@ -76,6 +77,7 @@ const router = createBrowserRouter(
       {/* Private - Registered Users Routes */}
       <Route path='' element={<PrivateRoute />}>
         <Route path='/profile' element={<ProfileScreen />} />
+        <Route path='/shipping' element={<ShippingScreen />} />
       </Route>
 
       <Route path='*' element={<NotFoundScreen />} />

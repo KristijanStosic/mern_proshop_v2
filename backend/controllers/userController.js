@@ -13,7 +13,8 @@ const getUserProfile = async (req, res) => {
 
     res.status(200).json({
         _id: user._id,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         isAdmin: user.isAdmin,
         dateOfBirth: user.dateOfBirth,
@@ -28,12 +29,13 @@ const getUserProfile = async (req, res) => {
 // @route PUT /api/users/profile
 // @access Private
 const updateUserProfile = async (req, res) => {
-    const { name, email, password, dateOfBirth, gender, biography, image, phone } = req.body
+    const { firstName, lastName, email, password, dateOfBirth, gender, biography, image, phone } = req.body
 
     const user = await User.findById(req.user._id)
 
     if (user) {
-        user.name = name || user.name
+        user.firstName = firstName || user.firstName
+        user.lastName = lastName || user.lastName
         user.email = email || user.email
         user.dateOfBirth = dateOfBirth || user.dateOfBirth
         user.gender = gender || user.gender
@@ -49,7 +51,8 @@ const updateUserProfile = async (req, res) => {
 
         res.status(200).json({
             _id: updatedUser._id,
-            name: updatedUser.name,
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin,
             dateOfBirth: updatedUser.dateOfBirth,
@@ -77,7 +80,8 @@ const getUsers = async (req, res) => {
 
     if (req.query.keyword) {
         searchCriteria.$or = [
-            { name: { $regex: req.query.keyword, $options: 'i' } },
+            { firstName: { $regex: req.query.keyword, $options: 'i' } },
+            { lastName: { $regex: req.query.keyword, $options: 'i' } },
             { email: { $regex: req.query.keyword, $options: 'i' } },
         ]
     }
@@ -113,7 +117,7 @@ const getUserById = async (req, res) => {
 // @route PUT /api/users/:id
 // @access Private/Admin
 const updateUser = async (req, res) => {
-    const { name, email, isAdmin } = req.body
+    const { firstName, lastName, email, isAdmin } = req.body
 
     const user = await User.findById(req.params.id)
 
@@ -122,7 +126,8 @@ const updateUser = async (req, res) => {
         throw new Error('User not found')
     }
 
-    user.name = name || user.name 
+    user.firstName = firstName || user.firstName 
+    user.lastName = lastName || user.lastName 
     user.email = email || user.email 
     user.isAdmin = Boolean(isAdmin)
 

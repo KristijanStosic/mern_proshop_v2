@@ -26,7 +26,8 @@ const login = async (req, res) => {
 
     res.status(200).json({
         _id: user._id,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         isAdmin: user.isAdmin,
         image: user.image
@@ -37,7 +38,7 @@ const login = async (req, res) => {
 // @route POST /api/auth/register
 // @access Public
 const register = async (req, res) => {
-    const { name, email, password } = req.body
+    const { firstName, lastName, email, password } = req.body
 
     // Find if user already exists
     const userExists = await User.findOne({ email })
@@ -48,7 +49,8 @@ const register = async (req, res) => {
     }
 
     const user = await User.create({
-        name,
+        firstName,
+        lastName,
         email,
         password,
     })
@@ -58,7 +60,8 @@ const register = async (req, res) => {
 
         res.status(201).json({
             _id: user._id,
-            name: user.name,
+            firstName: user.firstName,
+            lastName: user.lastName,
             email: user.email,
             isAdmin: user.isAdmin
         })

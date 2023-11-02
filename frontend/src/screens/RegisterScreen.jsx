@@ -14,11 +14,12 @@ import PasswordStrengthIndicator from '../components/PasswordStrengthIndicator'
 import PasswordInput from '../components/PasswordInput'
 
 const RegisterScreen = () => {
-    const [name, setName] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [isPasswordStrong, setIsPasswordStrong] = useState(false);
+    const [isPasswordStrong, setIsPasswordStrong] = useState(false)
 
     const { user } = useSelector((state) => state.auth)
 
@@ -70,10 +71,19 @@ const RegisterScreen = () => {
                         <h1 className='text-slate-700 text-3xl font-semibold'>REGISTER</h1>
 
                         <Input
-                            id='name'
-                            label='Name'
-                            onChange={(e) => setName(e.target.value)}
-                            value={name}
+                            id='firstName'
+                            label='First Name'
+                            onChange={(e) => setFirstName(e.target.value)}
+                            value={firstName}
+                            required
+                            disabled={isLoading}
+                        />
+
+                        <Input
+                            id='lastName'
+                            label='Last Name'
+                            onChange={(e) => setLastName(e.target.value)}
+                            value={lastName}
                             required
                             disabled={isLoading}
                         />
@@ -117,10 +127,10 @@ const RegisterScreen = () => {
                             }}
                         />
 
-                        {password && <PasswordStrengthIndicator 
-                                        password={password} 
-                                        onPasswordStrengthChange={(isStrong) => setIsPasswordStrong(isStrong)}
-                                    />
+                        {password && <PasswordStrengthIndicator
+                            password={password}
+                            onPasswordStrengthChange={(isStrong) => setIsPasswordStrong(isStrong)}
+                        />
                         }
 
                         <Button

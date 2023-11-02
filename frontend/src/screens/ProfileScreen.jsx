@@ -21,7 +21,8 @@ import ProfileTextArea from "../components/ProfileTextArea"
 const ProfileScreen = () => {
     const dispatch = useDispatch()
 
-    const [name, setName] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState()
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -81,7 +82,8 @@ const ProfileScreen = () => {
     useEffect(() => {
         if (data) {
             refetch()
-            setName(data.name)
+            setFirstName(data.firstName)
+            setLastName(data.lastName)
             setEmail(data.email)
             setDateOfBirth(data.dateOfBirth)
             setGender(data.gender)
@@ -107,11 +109,20 @@ const ProfileScreen = () => {
                             </h1>
 
                             <ProfileInput 
-                                id='name'
-                                value={name}
+                                id='firstName'
+                                value={firstName}
                                 type='text'
-                                placeholder='Write your name here'
-                                onChange={(e) => setName(e.target.value)}
+                                placeholder='Write your first name here'
+                                onChange={(e) => setFirstName(e.target.value)}
+                                disabled={loadingUpdateProfile}
+                            />
+
+                            <ProfileInput 
+                                id='lastName'
+                                value={lastName}
+                                type='text'
+                                placeholder='Write your last name here'
+                                onChange={(e) => setLastName(e.target.value)}
                                 disabled={loadingUpdateProfile}
                             />
 

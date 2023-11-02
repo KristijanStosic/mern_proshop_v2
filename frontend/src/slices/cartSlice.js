@@ -1,32 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { updateCart, addDecimals } from "../utils/cartUtils"
 
-const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null
-
-const initialState = cart 
-    ? cart 
-    : {
-        cartItems: [],
-        shippingAddress: {},
-        paymentMethod: 'PayPal',
-        itemsPrice: 0,
-        shippingPrice: 0,
-        taxPrice: 0,
-        totalPrice: 0,
-        // cartSidebar: false
-    }
-
-/*
-const initialState =  {
-    cartItems: cart.cartItems ? cart.cartItems : [],
-    shippingAddress: {},
-    paymentMethod: 'PayPal',
-    itemsPrice: 0,
-    shippingPrice: 0,
-    taxPrice: 0,
-    totalPrice: 0,
-}
-*/
+const initialState = localStorage.getItem('cart')
+  ? JSON.parse(localStorage.getItem('cart'))
+  : { cartItems: [], shippingAddress: {}, paymentMethod: 'PayPal' };
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -64,6 +41,7 @@ const cartSlice = createSlice({
         removeFromCart: (state, action) => {
             state.cartItems = state.cartItems.filter((x) => x._id !== action.payload) // action.payload is ID passed in
 
+            /*
             // Calculate items price
             state.itemsPrice = addDecimals(state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
 
@@ -77,8 +55,10 @@ const cartSlice = createSlice({
             state.totalPrice = (Number(state.itemsPrice) + Number(state.shippingPrice) + Number(state.taxPrice)).toFixed(2)
 
             localStorage.setItem('cart', JSON.stringify(state))
+           
             return state
-            //return updateCart(state)
+             */
+            return updateCart(state)
         },
         clearCartItems: (state) => {
             state.cartItems = []
@@ -90,8 +70,19 @@ const cartSlice = createSlice({
             return state
             //return updateCart(state)
         },
-        toggleCartSidebar: (state) => {
-            state.cartSidebar = !state.cartSidebar
+        saveShippingAddress: (state, action) => {
+            state.shippingAddress = action.payload
+            return updateCart(state)
+        },
+        resetCart: (state) => {
+            state.cartItems = []
+            state.shippingAddress = {}
+            state.itemsPrice = 0
+            state.shippingPrice = 0
+            state.taxPrice = 0
+            state.totalPrice = 0
+            localStorage.setItem('cart', JSON.stringify(state))
+            return state
         },
     }
 })
@@ -100,7 +91,8 @@ export const {
     addToCart,
     removeFromCart,
     clearCartItems,
-    toggleCartSidebar,
+    saveShippingAddress,
+    resetCart
 } = cartSlice.actions
 
 export default cartSlice.reducer

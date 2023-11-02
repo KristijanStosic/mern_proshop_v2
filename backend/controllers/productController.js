@@ -48,7 +48,7 @@ const getProducts = async (req, res) => {
 // @route   GET /api/products/:id
 // @access  Public
 const getProductById = async (req, res) => {
-  const product = await Product.findById(req.params.id).populate('reviews.user')
+  const product = await Product.findById(req.params.id).populate('reviews.user', '-password')
 
   if (!product) {
     res.status(404)
@@ -153,7 +153,7 @@ const createProductReview = async (req, res) => {
     }
 
     const review = {
-      name: req.user.name,
+      name: req.user.firstName + ' ' + req.user.lastName,
       rating: Number(rating),
       comment,
       user: req.user._id,
