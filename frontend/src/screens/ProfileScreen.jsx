@@ -26,7 +26,6 @@ const ProfileScreen = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [dateOfBirth, setDateOfBirth] = useState('')
     const [gender, setGender] = useState('')
     const [biography, setBiography] = useState('')
     const [image, setImage] = useState('')
@@ -41,7 +40,7 @@ const ProfileScreen = () => {
         if (password !== confirmPassword) {
             toast.error('Passwords do not match')
         } else {
-            const userData = { name, email, password, dateOfBirth, gender, biography, image, phone }
+            const userData = { name, email, password, gender, biography, image, phone }
             try {
                 const res = await updateProfile(userData).unwrap()
                 dispatch(setCredentials({ ...res }))
@@ -85,7 +84,6 @@ const ProfileScreen = () => {
             setFirstName(data.firstName)
             setLastName(data.lastName)
             setEmail(data.email)
-            setDateOfBirth(data.dateOfBirth)
             setGender(data.gender)
             setBiography(data.biography)
             setImage(data.image)
@@ -148,15 +146,6 @@ const ProfileScreen = () => {
                                 label='Confirm New Password'
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 value={confirmPassword}
-                                disabled={loadingUpdateProfile}
-                            />
-
-                            <Input
-                                id='dateOfBirth'
-                                label='Date of Birth'
-                                onChange={(e) => setDateOfBirth(e.target.value)}
-                                value={dateOfBirth}
-                                type='date'
                                 disabled={loadingUpdateProfile}
                             />
 

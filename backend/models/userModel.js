@@ -25,9 +25,6 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    dateOfBirth: {
-      type: Date
-    },
     gender: {
       type: String,
       enum: ['male', 'female']

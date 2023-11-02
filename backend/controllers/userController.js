@@ -29,7 +29,7 @@ const getUserProfile = async (req, res) => {
 // @route PUT /api/users/profile
 // @access Private
 const updateUserProfile = async (req, res) => {
-    const { firstName, lastName, email, password, dateOfBirth, gender, biography, image, phone } = req.body
+    const { firstName, lastName, email, password, gender, biography, image, phone } = req.body
 
     const user = await User.findById(req.user._id)
 
@@ -37,7 +37,6 @@ const updateUserProfile = async (req, res) => {
         user.firstName = firstName || user.firstName
         user.lastName = lastName || user.lastName
         user.email = email || user.email
-        user.dateOfBirth = dateOfBirth || user.dateOfBirth
         user.gender = gender || user.gender
         user.biography = biography || user.biography
         user.image = image || user.image
@@ -55,7 +54,6 @@ const updateUserProfile = async (req, res) => {
             lastName: updatedUser.lastName,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin,
-            dateOfBirth: updatedUser.dateOfBirth,
             gender: updatedUser.gender,
             biography: updatedUser.biography,
             image: updatedUser.image,
@@ -140,7 +138,7 @@ const updateUser = async (req, res) => {
 // @route DELETE /api/users/:id
 // @access Private/Admin
 const deleteUser = async (req, res) => {
-    const user = await User.findbyId(req.params.id)
+    const user = await User.findById(req.params.id)
 
     if (!user) {
         res.status(404)

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link, useParams } from "react-router-dom"
 import { useGetUsersQuery } from "../../slices/usersApiSlice"
 import { FaCheck, FaEye, FaPen, FaTimes, FaTrash } from "react-icons/fa"
@@ -7,70 +8,86 @@ import Container from "../../components/Container"
 import PaginateUsers from '../../components/PaginateUsers'
 import Message from "../../components/Message"
 import GoBackButton from "../../components/GoBackButton"
+import DeleteUserModal from '../../components/DeleteUserModal'
+import Backdrop from '../../components/Backdrop'
 
 const UserListScreen = () => {
+    const [userData, setUserData] = useState(null)
+    const [openModal, setOpenModal] = useState(false)
+
+    const openDeleteModal = (data) => {
+        setUserData(data)
+        setOpenModal(true)
+    }
+
+    const closeDeleteModal = () => {
+        setOpenModal(false)
+        setUserData(null)
+    }
+
     const { keyword, page } = useParams()
 
-    const { data, isLoading, isFetching, error } = useGetUsersQuery({ keyword, page })
+    const { data, isLoading, error, refetch } = useGetUsersQuery({ keyword, page })
 
     return (
-        <div className="p-8">
+        <>
+            <div className="p-8">
 
-            <Container>
+                <Container>
 
-                <div className="max-w-[100px] pb-3">
-                    {keyword && <GoBackButton />}
-                </div>
+                    <div className="max-w-[100px] pb-3">
+                        {keyword && <GoBackButton />}
+                    </div>
 
-                {isLoading || isFetching ? (
-                    <Loader />
-                ) : error ? (
-                    <Message>{error?.data?.message || error.error}</Message>
-                ) : (
-                    <>
-                        <div className="flex items-center justify-between bg-slate-200 px-5 py-3 rounded">
-                            <h1 className="text-3xl font-semibold text-slate-700 uppercase">
-                                Users
-                            </h1>
-                            <SearchBox searchType='users' placeholder='Search Users...' isAdmin={true} />
-                        </div>
+                    {isLoading ? (
+                        <Loader />
+                    ) : error ? (
+                        <Message>{error?.data?.message || error.error}</Message>
+                    ) : (
+                        <>
+                            <div className="flex items-center justify-between bg-slate-200 px-5 py-3 rounded">
+                                <h1 className="text-3xl font-semibold text-slate-700 uppercase">
+                                    Users
+                                </h1>
+                                <SearchBox searchType='users' placeholder='Search Users...' isAdmin={true} />
+                            </div>
 
-                        <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-md">
+                            <div className="relative overflow-x-auto shadow-md sm:rounded-lg rounded-md">
 
-                            <table className="w-full text-sm text-slate-700 mt-3">
+                                <table className="w-full text-sm text-slate-700 mt-3">
 
-                                <thead className="text-md text-slate-200 uppercase bg-slate-800">
+                                    <thead className="text-md text-slate-200 uppercase bg-slate-800">
 
-                                    <tr>
-                                        <th scope="col" className="text-left px-6 py-3">
-                                            Name
-                                        </th>
-                                        <th scope="col" className="text-center px-6 py-3">
-                                            Email
-                                        </th>
-                                        <th scope="col" className="text-center px-6 py-3">
-                                            Admin
-                                        </th>
-                                        <th scope="col" className="text-end px-6 py-3">
-                                            <span>Actions</span>
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col" className="text-left px-6 py-3">
+                                                Name
+                                            </th>
+                                            <th scope="col" className="text-center px-6 py-3">
+                                                Email
+                                            </th>
+                                            <th scope="col" className="text-center px-6 py-3">
+                                                Admin
+                                            </th>
+                                            <th scope="col" className="text-end px-6 py-3">
+                                                <span>Actions</span>
+                                            </th>
+                                        </tr>
 
-                                </thead>
+                                    </thead>
 
-                                <tbody>
-                                    {data.users.map((user) => (
-                                        <tr key={user._id} 
-                                        className="
+                                    <tbody>
+                                        {data.users.map((user) => (
+                                            <tr key={user._id}
+                                                className="
                                             border-b-[1.5px] 
                                           border-slate-300
                                           bg-white 
                                           hover:bg-slate-200
                                             hover:cursor-pointer
                                         "
-                                        >
-                                            <td 
-                                            className="
+                                            >
+                                                <td
+                                                    className="
                                                 text-left 
                                                 px-6 
                                                 py-4 
@@ -79,64 +96,72 @@ const UserListScreen = () => {
                                                 text-lg 
                                                 whitespace-nowrap
                                             "
-                                            >
-                                                {user.firstName} {user.lastName}
-                                            </td>
+                                                >
+                                                    {user.firstName} {user.lastName}
+                                                </td>
 
-                                            <td className="text-center text-md">
-                                                {user.email}
-                                            </td>
+                                                <td className="text-center text-md">
+                                                    {user.email}
+                                                </td>
 
-                                            <td className="text-center text-md">
+                                                <td className="text-center text-md">
 
-                                                <div className="flex items-center justify-center">
-                                                    {user.isAdmin ? (
-                                                        <FaCheck className="text-green-600" />
-                                                    ) : (
-                                                        <FaTimes className="text-rose-600" />
-                                                    )}
-                                                </div>
+                                                    <div className="flex items-center justify-center">
+                                                        {user.isAdmin ? (
+                                                            <FaCheck className="text-green-600" />
+                                                        ) : (
+                                                            <FaTimes className="text-rose-600" />
+                                                        )}
+                                                    </div>
 
-                                            </td>
+                                                </td>
 
-                                            <td className="px-6 py-4">
-                                                
-                                                <div className="flex items-center justify-end gap-3">                                               
-                                                    <Link 
-                                                        className="text-blue-600 hover:opacity-75" 
-                                                        to={`/admin/user/${user._id}`}
-                                                    >
-                                                        <FaEye size={20} />
-                                                    </Link>
+                                                <td className="px-6 py-4">
 
-                                                    <Link 
-                                                        className="text-slate-800 hover:opacity-75" 
-                                                        to={`/update-user/${user._id}`}
-                                                    >
-                                                        <FaPen size={20} />
-                                                    </Link>
+                                                    <div className="flex items-center justify-end gap-3">
+                                                        <Link
+                                                            className="text-blue-600 hover:opacity-75"
+                                                            to={`/admin/user/${user._id}`}
+                                                        >
+                                                            <FaEye size={20} />
+                                                        </Link>
 
-                                                    <FaTrash className="text-rose-600 hover:opacity-75" size={20} />
-                                                </div>
+                                                        <Link
+                                                            className="text-slate-800 hover:opacity-75"
+                                                            to={`/admin/update-user/${user._id}`}
+                                                        >
+                                                            <FaPen size={20} />
+                                                        </Link>
 
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                                
-                            </table>
-                        </div>
-                        <div className="p-4">
-                            <PaginateUsers
-                                page={data.page}
-                                pages={data.pages}
-                                isAdmin={true}
-                            />
-                        </div>
-                    </>
-                )}
-            </Container>
-        </div>
+                                                        <FaTrash onClick={() => openDeleteModal(user)} className="text-rose-600 hover:opacity-75" size={20} />
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <div className="p-4">
+                                <PaginateUsers
+                                    page={data.page}
+                                    pages={data.pages}
+                                    isAdmin={true}
+                                />
+                            </div>
+                        </>
+                    )}
+                </Container>
+            </div>
+            {openModal &&
+                <DeleteUserModal
+                    refetch={refetch}
+                    user={userData}
+                    closeDeleteModal={closeDeleteModal}
+                />}
+            {openModal && <Backdrop onClick={closeDeleteModal} />}
+        </>
     )
 }
 

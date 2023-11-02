@@ -38,6 +38,8 @@ const LoginScreen = () => {
             toast.success('Logged in successfully!')
         } catch (error) {
             toast.error(error?.data?.message || error.error)
+            setEmail('')
+            setPassword('')
         }
     }
 
