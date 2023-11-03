@@ -10,6 +10,7 @@ const PlaceOrderScreen = () => {
             </div>
             <Container>
                 <CheckoutSteps step1 step2 step3 selectedStep='place-order' />
+                <h1>place order screen</h1>
             </Container>
         </div>
     )
