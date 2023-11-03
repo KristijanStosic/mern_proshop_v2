@@ -34,7 +34,7 @@ const PaymentScreen = () => {
                 <GoBackButton />
             </div>
             <Container>
-                <CheckoutSteps step1 step2 />
+                <CheckoutSteps step1 step2 selectedStep='payment' />
                 <h1
                     className="
                         mb-4 

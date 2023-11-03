@@ -9,7 +9,7 @@ const PlaceOrderScreen = () => {
                 <GoBackButton />
             </div>
             <Container>
-                <CheckoutSteps step1 step2 step3 />
+                <CheckoutSteps step1 step2 step3 selectedStep='place-order' />
             </Container>
         </div>
     )

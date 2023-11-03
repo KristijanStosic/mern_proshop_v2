@@ -42,9 +42,9 @@ const ShippingScreen = () => {
                 />
             </div>
             <Container>
-                    <CheckoutSteps step1 />
+                    <CheckoutSteps step1 selectedStep='shipping' />
 
-                    <div className="flex flex-col w-full px-0 mx-auto md:flex-row border border-slate-300 rounded">
+                    <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
 
                         <div className="flex flex-col md:w-full px-5 py-3">
 
