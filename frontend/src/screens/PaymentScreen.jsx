@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { savePaymentMethod } from "../slices/cartSlice"
+import { FaCcPaypal, FaCcStripe } from "react-icons/fa"
 import Button from "../components/Button"
 import CheckoutSteps from "../components/CheckoutSteps"
 import Container from "../components/Container"
 import GoBackButton from "../components/GoBackButton"
-import { useDispatch, useSelector } from "react-redux"
-import { savePaymentMethod } from "../slices/cartSlice"
-import Input from "../components/Input"
-import { FaCcPaypal, FaCcStripe } from "react-icons/fa"
 
 const PaymentScreen = () => {
     const [paymentMethod, setPaymentMethod] = useState('PayPal')
@@ -24,7 +23,7 @@ const PaymentScreen = () => {
     }
 
     useEffect(() => {
-        if (!shippingAddress) {
+        if (!shippingAddress.address) {
             navigate('/shipping')
         }
     }, [shippingAddress, navigate])
@@ -49,7 +48,9 @@ const PaymentScreen = () => {
 
                 <form onSubmit={savePaymentMethodHandler}>
                     <div className="flex flex-col justify-start gap-2 text-slate-700 text-lg">
+
                         <div className="flex items-center justify-start gap-2">
+
                             <FaCcPaypal color='#3b7bbf' size={40} />
                             <label htmlFor="paypal">PayPal</label>
                             <input
@@ -62,6 +63,7 @@ const PaymentScreen = () => {
                                 onChange={(e) => setPaymentMethod(e.target.value)}
                             />
                         </div>
+
                         <div className="flex items-center justify-start gap-2">
                             <FaCcStripe color='#5433FF' size={40} />
                             <label htmlFor="stripe">Stripe</label>
@@ -75,6 +77,7 @@ const PaymentScreen = () => {
                                 onChange={(e) => setPaymentMethod(e.target.value)}
                             />
                         </div>
+
                     </div>
 
                     <div className="w-[25%] mt-3">
@@ -83,6 +86,7 @@ const PaymentScreen = () => {
                             buttonText="Continue"
                         />
                     </div>
+                    
                 </form>
             </Container>
         </div>
