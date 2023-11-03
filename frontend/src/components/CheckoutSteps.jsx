@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { FaTruck } from "react-icons/fa"
 import { MdPayment, MdShoppingCart } from "react-icons/md"
 
@@ -16,27 +17,37 @@ const CheckoutSteps = ({ step1, step2, step3, selectedStep }) => {
             "
         >
             <li className={`
-            ${step1 ? "text-slate-700" : ""}
-            ${selectedStep === 'shipping' ? 'border-b-2 border-slate-700' : ''}
+                ${step1 ? "text-slate-700" : ""}
+                ${selectedStep === 'shipping' ? 'border-b-2 border-slate-700' : ''}
             `}
             >
-                <span className="inline-flex items-center gap-1">
-                    <FaTruck size={20} /> Shipping
-                </span>
+                <Link to='/shipping'>
+                    <span className="inline-flex items-center gap-1">
+                        <FaTruck size={20} /> Shipping
+                    </span>
+                </Link>
             </li>
 
             <li className={`
-            ${step2 ? "text-slate-700" : ""}
-            ${selectedStep === 'payment' ? 'border-b-2 border-slate-700' : ''}
+                ${step2 ? "text-slate-700" : ""}
+                ${selectedStep === 'payment' ? 'border-b-2 border-slate-700' : ''}
             `}>
-                <span className="inline-flex items-center gap-1"><MdPayment size={20} /> Payment</span>
+                <Link to='/payment'>
+                    <span className="inline-flex items-center gap-1">
+                        <MdPayment size={20} /> Payment
+                    </span>
+                </Link>
             </li>
 
             <li className={`
-            ${step3 ? "text-slate-700" : ""}
-            ${selectedStep === 'place-order' ? 'border-b-2 border-slate-700' : ''}
+                ${step3 ? "text-slate-700" : ""}
+                ${selectedStep === 'place-order' ? 'border-b-2 border-slate-700' : ''}
             `}>
-                <span className="inline-flex items-center gap-1"><MdShoppingCart size={20} /> Place Order</span>
+                <Link to='/place-order'>
+                    <span className="inline-flex items-center gap-1">
+                        <MdShoppingCart size={20} /> Place Order
+                    </span>
+                </Link>
             </li>
         </ol>
     )
