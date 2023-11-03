@@ -13,8 +13,7 @@ const GoBackButton = () => {
             small
             outline
             icon={<FaArrowCircleLeft size={16} />}
-        >
-        </Button>
+        />
     )
 }
 

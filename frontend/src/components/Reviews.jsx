@@ -24,7 +24,7 @@ const Reviews = ({ product }) => {
                                         <div className='flex items-center justify-start gap-3'>
 
                                             <div className='font-semibold'>
-                                                <Avatar src={review.user.image} />
+                                                <Avatar src={review.user?.image} />
                                             </div>
                                             <div className='font-semibold text-slate-700'>
                                                 {review.name}

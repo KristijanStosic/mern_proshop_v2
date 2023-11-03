@@ -2,8 +2,10 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { saveShippingAddress } from "../slices/cartSlice"
+import { FaArrowCircleLeft } from "react-icons/fa"
 import Container from "../components/Container"
 import Button from "../components/Button"
+import CheckoutSteps from "../components/CheckoutSteps"
 
 const ShippingScreen = () => {
     const { shippingAddress } = useSelector((state) => state.cart)
@@ -30,16 +32,29 @@ const ShippingScreen = () => {
 
     return (
         <div className="p-8">
+            <div className="w-[100px]">
+                <Button
+                    onClick={() => navigate('/cart')}
+                    buttonText='Go Back!'
+                    small
+                    outline
+                    icon={<FaArrowCircleLeft size={16} />}
+                />
+            </div>
             <Container>
-                    <div className="flex flex-col w-full px-0 mx-auto md:flex-row">
+                    <CheckoutSteps step1 />
 
-                        <div className="flex flex-col md:w-full">
+                    <div className="flex flex-col w-full px-0 mx-auto md:flex-row border border-slate-300 rounded">
+
+                        <div className="flex flex-col md:w-full px-5 py-3">
 
                             <h1 className="
-                            mb-4 
-                            font-medium 
-                          text-slate-700 
-                            md:text-3xl">
+                                mb-4 
+                                font-medium 
+                              text-slate-700 
+                                md:text-3xl
+                                "
+                            >
                                 Shipping Address
                             </h1>
 
