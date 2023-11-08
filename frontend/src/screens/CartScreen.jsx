@@ -81,8 +81,13 @@ const CartScreen = () => {
                             <div className='flex flex-col gap-1 items-start text-sm'>
 
                                 <div className='flex justify-between w-full font-semibold'>
-                                    <span className='text-lg'>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</span>
-                                    <span className='text-lg'>${convertToNumber(cart.itemsPrice)}</span>
+                                    <span className='text-lg'>
+                                        Subtotal 
+                                        ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items
+                                        </span>
+                                    <span className='text-lg'>
+                                        ${convertToNumber(cart.itemsPrice)}
+                                    </span>
                                 </div>
 
                                 <p className='text-slate-500'>Taxes and shipping calculated at checkout</p>

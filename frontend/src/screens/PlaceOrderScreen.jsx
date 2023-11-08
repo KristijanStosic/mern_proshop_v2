@@ -4,14 +4,12 @@ import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { useCreateOrderMutation } from '../slices/ordersApiSlice'
 import { clearCartItems } from '../slices/cartSlice'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
 import Container from '../components/Container'
 import GoBackButton from '../components/GoBackButton'
-import HorizontalLine from '../components/HorizontalLine'
 import Button from '../components/Button'
 import LoadingButton from '../components/LoadingButton'
+import Message from '../components/Message'
 
 const PlaceOrderScreen = () => {
     const cart = useSelector((state) => state.cart)
@@ -51,44 +49,64 @@ const PlaceOrderScreen = () => {
 
     return (
         <div className='p-8'>
+
             <div className='w-[100px]'>
                 <GoBackButton />
             </div>
+
             <Container>
+                {error && <Message>{error?.data?.message || error.error}</Message>}
+
                 <CheckoutSteps step1 step2 step3 selectedStep='place-order' />
+
                 <div className='grid md:grid-cols-2 gap-10'>
+
                     <div className='flex flex-col gap-3'>
+
                         <div className='flex flex-col gap-2'>
+
                             <h1 className='text-slate-700 text-2xl font-medium'>
                                 Shipping Address
                             </h1>
                             <div className='flex flex-col text-slate-700'>
-                                <span>
-                                    Name: &nbsp; {shippingAddress.firstName} {shippingAddress.lastName}
-                                </span>
-                                <span>
-                                    Address: &nbsp; {shippingAddress.address}
-                                </span>
-                                <span>
-                                    Postal Code: &nbsp; {shippingAddress.postalCode}
-                                </span>
-                                <span>
-                                    City: &nbsp; {shippingAddress.city}
-                                </span>
-                                <span>
-                                    Country: &nbsp; {shippingAddress.country}
-                                </span>
-                                <span>
-                                    Email: &nbsp; {shippingAddress.email}
-                                </span>
-                                <span>
-                                    Notes: &nbsp;
-                                    {shippingAddress?.note
-                                        ? shippingAddress.note
-                                        : 'Notes not included'
-                                    }
-                                </span>
+
+                                <p>
+                                    <strong>Name: </strong>
+                                    {shippingAddress.firstName} { ' ' }
+                                    {shippingAddress.lastName}
+                                </p>
+
+                                <p>
+                                    <strong>Address: </strong>
+                                    {shippingAddress.address}
+                                </p>
+
+                                <p>
+                                    <strong>Postal Code: </strong>
+                                    {shippingAddress.postalCode}
+                                </p>
+
+                                <p>
+                                    <strong>City: </strong>
+                                    {shippingAddress.city}
+                                </p>
+
+                                <p>
+                                    <strong>Country: </strong>
+                                    {shippingAddress.country}
+                                </p>
+                                <p>
+                                    <strong>Email: </strong>
+                                    {shippingAddress.email}
+                                </p>
+                                {shippingAddress.note && 
+                                <p>
+                                    <strong>Notes: </strong>
+                                    {shippingAddress.note}
+                                </p>
+                                }
                             </div>
+
                         </div>
 
                         <hr />
@@ -157,7 +175,7 @@ const PlaceOrderScreen = () => {
                                                     </div>
                                                 </Link>
                                                 <Link
-                                                    className='underline text-md'
+                                                    className='text-md'
                                                     to={`/product/${item._id}`}
                                                 >
                                                     {item.name}
@@ -185,30 +203,32 @@ const PlaceOrderScreen = () => {
 
                         <hr />
 
-                        <div className='flex justify-between p-5'>
-                            <span>Items: </span>
-                            <span>${cart.itemsPrice}</span>
-                        </div>
+                        <div className='font-semibold'>
+                            <div className='flex justify-between p-4'>
+                                <span>Items: </span>
+                                <span>${cart.itemsPrice}</span>
+                            </div>
 
-                        <hr />
+                            <hr />
 
-                        <div className='flex justify-between p-4'>
-                            <span>Shipping: </span>
-                            <span>${cart.shippingPrice}</span>
-                        </div>
+                            <div className='flex justify-between p-4'>
+                                <span>Shipping: </span>
+                                <span>${cart.shippingPrice}</span>
+                            </div>
 
-                        <hr />
+                            <hr />
 
-                        <div className='flex justify-between p-4'>
-                            <span>Tax: </span>
-                            <span>${cart.taxPrice}</span>
-                        </div>
+                            <div className='flex justify-between p-4'>
+                                <span>Tax: </span>
+                                <span>${cart.taxPrice}</span>
+                            </div>
 
-                        <hr />
+                            <hr />
 
-                        <div className='flex justify-between p-4'>
-                            <span>Total: </span>
-                            <span>${cart.totalPrice}</span>
+                            <div className='flex justify-between p-4'>
+                                <span>Total: </span>
+                                <span>${cart.totalPrice}</span>
+                            </div>
                         </div>
 
                         <hr />
@@ -222,6 +242,7 @@ const PlaceOrderScreen = () => {
                             />
                         </div>
                     </div>
+
                 </div>
             </Container>
         </div>

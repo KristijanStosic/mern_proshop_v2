@@ -54,7 +54,10 @@ const LoginScreen = () => {
             <Container>
                 <form onSubmit={loginHandler}>
                     <FormContainer>
-                        <h1 className='text-slate-700 text-3xl font-semibold'>LOGIN</h1>
+                        <h1 className='text-slate-700 text-3xl font-semibold'>
+                            LOGIN
+                        </h1>
+
                         <Input
                             id='email'
                             label='Email'
@@ -63,6 +66,7 @@ const LoginScreen = () => {
                             disabled={isLoading}
                             required
                         />
+
                         <PasswordInput
                             id='password'
                             label='Password'
@@ -87,6 +91,7 @@ const LoginScreen = () => {
                         <p className='text-sm text-slate-700'>Don't have an account?{' '}
                             <Link className='underline' to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>
                         </p>
+                        
                     </FormContainer>
                 </form>
             </Container>

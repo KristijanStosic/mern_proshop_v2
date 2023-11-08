@@ -7,7 +7,7 @@ const Reviews = ({ product }) => {
         <div>
             {product.reviews.length === 0 ? (
                 <div className='flex flex-col items-start'>
-                    <div className='text-lg text-white font-semibold bg-rose-600 px-4 py-3 rounded-md w-full'>
+                    <div className='text-lg text-white font-semibold bg-slate-700 px-4 py-3 rounded-md w-full'>
                         No reviews for this product yet
                     </div>
                 </div>

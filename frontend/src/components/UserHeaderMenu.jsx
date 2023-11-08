@@ -41,19 +41,20 @@ const UserHeaderMenu = () => {
         <>
             <div className="relative z-30">
                 <div className="
-                p-2 
-                border-[1px] 
-                border-slate-400 
-                flex 
-                flex-row 
-                items-center 
-                gap-1 
-                rounded-full 
-                cursor-pointer 
-                hover:shadow-md 
-                transition 
-                text-slate-700" 
-                onClick={toggleUserMenu}
+                    p-2 
+                    border-[1px] 
+                    border-slate-400 
+                    flex 
+                    flex-row 
+                    items-center 
+                    gap-1 
+                    rounded-full 
+                    cursor-pointer 
+                    hover:shadow-md 
+                    transition 
+                    text-slate-700
+                    " 
+                    onClick={toggleUserMenu}
                 >
                     <Avatar src={user?.image} />
                     {user?.firstName} {user?.lastName}
@@ -73,19 +74,23 @@ const UserHeaderMenu = () => {
                                         </UserMenuItem>
                                     </Link>
                                 )}
+
                                 <Link to='/profile'>
                                     <UserMenuItem
                                         icon={<FaUserEdit className='mr-2' />}
                                         onClick={toggleUserMenu}>My Profile</UserMenuItem>
                                 </Link>
+
                                 <Link to='/my-orders'>
                                     <UserMenuItem
                                         icon={<FaShoppingBag className="mr-2" />}
                                         onClick={toggleUserMenu}>
-                                        Your Orders
+                                        My Orders
                                     </UserMenuItem>
                                 </Link>
+
                                 <hr />
+
                                 <UserMenuItem
                                     icon={<FaArrowLeft className="mr-2" />}
                                     onClick={() => {
@@ -98,6 +103,7 @@ const UserHeaderMenu = () => {
                             </div>
                         ) : (
                             <div>
+
                                 <Link to='/login'>
                                     <UserMenuItem
                                         icon={<FaArrowRight className="mr-2" />}
@@ -105,6 +111,7 @@ const UserHeaderMenu = () => {
                                         Login
                                     </UserMenuItem>
                                 </Link>
+
                                 <Link to='/register'>
                                     <UserMenuItem
                                         icon={<FaUserPlus className="mr-2" />}
@@ -112,6 +119,7 @@ const UserHeaderMenu = () => {
                                         Register
                                     </UserMenuItem>
                                 </Link>
+                                
                             </div>
                         )}
                     </div>

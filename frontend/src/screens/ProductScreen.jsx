@@ -125,7 +125,9 @@ const ProductScreen = () => {
                         )
                       )}
                     </select>
+
                     <HorizontalLine />
+                    
                   </div>
 
                   <div>

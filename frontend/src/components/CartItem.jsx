@@ -54,6 +54,7 @@ const CartItem = ({ cartItem }) => {
 
     return (
         <div className="grid grid-cols-6 text-xs md:text-sm gap-4 border-t-[1.5px] border-slate-200 pt-4 mt-4 items-center text-slate-700">
+
             <div className="col-span-2 justify-self-start flex items-center gap-2 md:gap-4">
                 <Link to={`/product/${cartItem._id}`}>
                     <div className="relative w-[70px] aspect-square overflow-hidden">
@@ -64,7 +65,11 @@ const CartItem = ({ cartItem }) => {
                     {cartItem.name}
                 </Link>
             </div>
-            <div className="justify-self-center font-semibold">${convertToNumber(cartItem.price)}</div>
+
+            <div className="justify-self-center font-semibold">
+                ${convertToNumber(cartItem.price)}
+            </div>
+
             <div className="justify-self-center">
                 <SelectQuantity
                     qty={cartItem.qty}
@@ -89,12 +94,18 @@ const CartItem = ({ cartItem }) => {
                     )}
                 </select> */}
             </div>
+
             <div className="justify-self-center font-semibold">
                 ${convertToNumber(cartItem.qty * cartItem.price)}
             </div>
+
             <div className="justify-self-end">
-                <FaTrash onClick={() => removeFromCartHandler(cartItem._id, cartItem.name)} className="text-slate-700 cursor-pointer hover:opacity-75" size={24} />
+                <FaTrash 
+                    onClick={() => removeFromCartHandler(cartItem._id, cartItem.name)} className="text-slate-700 cursor-pointer hover:opacity-75" 
+                    size={24} 
+                />
             </div>
+
         </div>
     )
 }

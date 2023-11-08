@@ -3,7 +3,8 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'
 const Rating = ({ rating, numberOfReviews }) => {
     return (
         <div className='flex items-center gap-3'>
-            <div className='flex text-xl text-rose-600 gap-1'>
+
+            <div className='flex text-lg text-rose-600 gap-[2.5px]'>
                {[1, 2, 3, 4, 5].map((star, index) => (
                 <span key={index}>
                     {rating >= star ? (
@@ -61,6 +62,7 @@ const Rating = ({ rating, numberOfReviews }) => {
                     )}
                 </span> */}
             </div>
+
             {numberOfReviews !== undefined && (
                 <span className='text-md text-slate-700 font-medium'>
                     {numberOfReviews === 0
@@ -70,6 +72,7 @@ const Rating = ({ rating, numberOfReviews }) => {
                             : `${numberOfReviews} Reviews`}
                 </span>
             )}
+            
         </div>
     )
 }
