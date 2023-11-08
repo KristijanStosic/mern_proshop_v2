@@ -26,21 +26,26 @@ const createOrder = async (req, res) => {
             user: req.user._id
         })
 
-        for (const item of orderItems) {
-            const product = await Product.findById(item._id)
-
-            if (product) {
-                product.countInStock -= item.qty
-                await product.save()
-            } else {
-                res.status(404)
-                throw new Error('Product not found')
+        if (order) {
+            for (const item of orderItems) {
+                const product = await Product.findById(item._id)
+    
+                if (product) {
+                    product.countInStock -= item.qty
+                    await product.save()
+                } else {
+                    res.status(404)
+                    throw new Error('Product not found')
+                }
             }
+    
+            const createdOrder = await order.save()
+    
+            res.status(201).json(createdOrder)
+        } else {
+            res.status(400)
+            throw new Error('Invalid order data')
         }
-
-        const createdOrder = await order.save()
-
-        res.status(201).json(createdOrder)
     }
 }
 
