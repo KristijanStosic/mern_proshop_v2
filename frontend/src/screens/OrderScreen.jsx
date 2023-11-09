@@ -1,10 +1,8 @@
 import { Link, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { useGetOrderByIdQuery } from '../slices/ordersApiSlice'
+import { addDecimals } from '../utils/cartUtils'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import Button from '../components/Button'
-import LoadingButton from '../components/LoadingButton'
 import Container from '../components/Container'
 import HorizontalLine from '../components/HorizontalLine'
 
@@ -49,36 +47,19 @@ const OrderScreen = () => {
 
                                 <p>
                                     <strong>Address: </strong>
-                                    {order.shippingAddress.address},
-                                    {order.shippingAddress.postalCode},
-                                    {order.shippingAddress.city},
-                                    {order.shippingAddress.country}
+                                    {order.shippingAddress.address}, {' '}
+                                    {order.shippingAddress.postalCode}, {' '}
+                                    {order.shippingAddress.city}, {' '}
+                                    {order.shippingAddress.country}, { ' ' }
+                                    {order.shippingAddress.phone}
                                 </p>
 
-                                {order.shippingAddress.note && 
-                                <p>
-                                    <strong>Notes: </strong>
-                                    {order.shippingAddress.note}
-                                </p>
+                                {order.shippingAddress.note &&
+                                    <p>
+                                        <strong>Notes: </strong>
+                                        {order.shippingAddress.note}
+                                    </p>
                                 }
-
-                                <HorizontalLine />
-
-                                <div className='flex flex-col gap-2'>
-                                    <h1 className='text-slate-700 text-2xl font-medium'>
-                                        Dispatch
-                                    </h1>
-
-                                    {order.isDispatched ? (
-                                        <div className='text-md text-green-900 bg-rose-300 p-4 rounded-md'>
-                                            Dispatched at {order.dispatchedAt}
-                                        </div>
-                                    ) : (
-                                        <div className='text-md text-rose-900 bg-rose-300 p-4 rounded-md'>
-                                            Not Dispatched
-                                        </div>
-                                    )}
-                                </div>
 
                                 <HorizontalLine />
 
@@ -86,6 +67,7 @@ const OrderScreen = () => {
                                     <h1 className='text-slate-700 text-2xl font-medium'>
                                         Payment Method
                                     </h1>
+
                                     <div className='text-slate-700'>
                                         <p>
                                             <strong>Method: </strong>
@@ -102,6 +84,26 @@ const OrderScreen = () => {
                                             Not Paid
                                         </div>
                                     )}
+
+                                </div>
+
+                                <HorizontalLine />
+                                
+                                <div className='flex flex-col gap-2'>
+                                    <h1 className='text-slate-700 text-2xl font-medium'>
+                                        Dispatch
+                                    </h1>
+
+                                    {order.isDispatched ? (
+                                        <div className='text-md text-green-900 bg-rose-300 p-4 rounded-md'>
+                                            Dispatched at {order.dispatchedAt}
+                                        </div>
+                                    ) : (
+                                        <div className='text-md text-rose-900 bg-rose-300 p-4 rounded-md'>
+                                            Not Dispatched
+                                        </div>
+                                    )}
+
                                 </div>
 
                                 <HorizontalLine />
@@ -120,6 +122,7 @@ const OrderScreen = () => {
                                             Not Delivered
                                         </div>
                                     )}
+
                                 </div>
 
                                 <HorizontalLine />
@@ -153,7 +156,7 @@ const OrderScreen = () => {
                                                     gap-3
                                                     '
                                                 >
-                                                    <Link to={`/product/${item._id}`}>
+                                                    <Link to={`/product/${item.product}`}>
                                                         <div
                                                             className='
                                                         relative 
@@ -176,7 +179,7 @@ const OrderScreen = () => {
                                                     </Link>
                                                     <Link
                                                         className='underline text-md'
-                                                        to={`/product/${item._id}`}
+                                                        to={`/product/${item.product}`}
                                                     >
                                                         {item.name}
                                                     </Link>
@@ -185,7 +188,8 @@ const OrderScreen = () => {
                                                 <span className='font-semibold'>
                                                     {item.qty} x ${item.price}
                                                     {' '}
-                                                    = ${item.qty * item.price}
+                                                    = 
+                                                    ${addDecimals(item.qty * item.price)}
                                                 </span>
                                             </div>
                                         ))}
@@ -226,7 +230,7 @@ const OrderScreen = () => {
                                         <span>Total: </span>
                                         <span>${order.totalPrice}</span>
                                     </div>
-                                    
+
                                 </div>
 
                             </div>

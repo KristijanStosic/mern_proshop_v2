@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { useCreateOrderMutation } from '../slices/ordersApiSlice'
 import { clearCartItems } from '../slices/cartSlice'
+import { addDecimals } from '../utils/cartUtils'
 import CheckoutSteps from '../components/CheckoutSteps'
 import Container from '../components/Container'
 import GoBackButton from '../components/GoBackButton'
@@ -68,6 +69,9 @@ const PlaceOrderScreen = () => {
                             <h1 className='text-slate-700 text-2xl font-medium'>
                                 Shipping Address
                             </h1>
+
+                            <hr /> 
+
                             <div className='flex flex-col text-slate-700'>
 
                                 <p>
@@ -95,10 +99,17 @@ const PlaceOrderScreen = () => {
                                     <strong>Country: </strong>
                                     {shippingAddress.country}
                                 </p>
+
+                                <p>
+                                    <strong>Phone: </strong>
+                                    {shippingAddress.phone}
+                                </p>
+
                                 <p>
                                     <strong>Email: </strong>
                                     {shippingAddress.email}
                                 </p>
+
                                 {shippingAddress.note && 
                                 <p>
                                     <strong>Notes: </strong>
@@ -185,7 +196,8 @@ const PlaceOrderScreen = () => {
                                             <span className='font-semibold'>
                                                 {item.qty} x ${item.price}
                                                 {' '}
-                                                = ${item.qty * item.price}
+                                                = 
+                                                ${addDecimals(item.qty * item.price)}
                                             </span>
                                         </div>
                                     ))}

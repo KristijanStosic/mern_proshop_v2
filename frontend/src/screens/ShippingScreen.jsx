@@ -17,6 +17,7 @@ const ShippingScreen = () => {
     const [city, setCity] = useState(shippingAddress?.city || '')
     const [postalCode, setPostalCode] = useState(shippingAddress?.postalCode || '')
     const [country, setCountry] = useState(shippingAddress?.country || '')
+    const [phone, setPhone] = useState(shippingAddress?.phone || '')
     const [note, setNote] = useState(shippingAddress?.note || '')
     const [email, setEmail] = useState(user?.email || '')
 
@@ -25,7 +26,7 @@ const ShippingScreen = () => {
 
     const saveShippingAddressHandler = (e) => {
         e.preventDefault()
-        const shippingAddressData = { firstName, lastName, address, city, postalCode, country, note, email }
+        const shippingAddressData = { firstName, lastName, address, city, postalCode, country, note, email, phone }
         dispatch(saveShippingAddress(shippingAddressData))
         navigate('/payment')
     }
@@ -286,6 +287,44 @@ const ShippingScreen = () => {
                                                 name="country"
                                                 type="text"
                                                 placeholder="Country"
+                                                className="
+                                                w-full 
+                                                px-4 
+                                                py-3 
+                                                text-sm border 
+                                                border-slate-300 
+                                                rounded 
+                                                lg:text-sm 
+                                                focus:outline-none 
+                                                focus:ring-1 
+                                                focus:ring-slate-700
+                                                " 
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-4">
+                                        <div className="w-full">
+                                            <label
+                                                htmlFor="phone"
+                                                className="
+                                                block 
+                                                mb-3 
+                                                text-sm 
+                                                font-semibold 
+                                                text-slate-700
+                                                "
+                                            >
+                                                Phone
+                                            </label>
+                                            <input
+                                                onChange={(e) => setPhone(e.target.value)}
+                                                value={phone}
+                                                name="phone"
+                                                type="text"
+                                                placeholder="Phone"
+                                                minLength={9}
+                                                maxLength={13}
                                                 className="
                                                 w-full 
                                                 px-4 
