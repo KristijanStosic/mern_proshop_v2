@@ -128,7 +128,7 @@ const PlaceOrderScreen = () => {
                             </h1>
                             <div className='text-slate-700'>
                                 <span>
-                                    Method: {paymentMethod}
+                                    <strong>Method:</strong> {paymentMethod}
                                 </span>
                             </div>
                         </div>

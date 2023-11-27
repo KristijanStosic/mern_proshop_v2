@@ -1,0 +1,9 @@
+Stripe payment
+paypal payment
+view user
+update user 
+get all orders
+view order
+update order to paid 
+update order to dispatched 
+update order to delivered 

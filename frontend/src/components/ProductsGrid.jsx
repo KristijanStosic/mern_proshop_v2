@@ -61,8 +61,7 @@ const ProductsGrid = ({ product }) => {
                         disabled={product.countInStock === 0}
                         small
                         icon={<FaShoppingCart size={16} />}
-                    >
-                    </Button>
+                    />
                 </div>
             </div>
         </div>

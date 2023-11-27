@@ -71,7 +71,7 @@ const OrderScreen = () => {
                                     <div className='text-slate-700'>
                                         <p>
                                             <strong>Method: </strong>
-                                            {order.paymentMethod}
+                                            <strong>{order.paymentMethod}</strong>
                                         </p>
                                     </div>
 
