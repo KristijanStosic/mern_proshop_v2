@@ -120,7 +120,16 @@ const updateOrderToDispatched = async (req, res) => {
 // @route   DELETE /api/orders/:id
 // @access  Private/Admin
 const deleteOrder = async (req, res) => {
-    res.send('delete order')
+    const order = await Order.findById(req.params.id)
+
+    if (!order) {
+        res.status(404)
+        throw new Error('User not found')
+    }
+
+    await Order.deleteOne({ _id: order._id })
+
+    res.status(200).json({ message: 'Order deleted' })
 }
 
 export {
